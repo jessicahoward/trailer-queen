@@ -11,24 +11,24 @@ import org.launchcode.trailerqueen.models.data.UserDao;
 import javax.validation.Valid;
 
 @Controller
-public class HelloTestController {
+public class UserController {
 
     @Autowired
     private UserDao userDao;
 
-    @RequestMapping(value = "hello")
-    @ResponseBody
-    public String hello() {
-        return "Hello Cruel World";
-    }
-
-    
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "add-user", method = RequestMethod.GET)
     public String displayCreateUserForm(Model model) {
 
         model.addAttribute("title", "Create Account");
         model.addAttribute(new User());
-        return "user/index";
+        return "user/addUser";
+    }
+
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String displayLoginForm(Model model) {
+
+        model.addAttribute("title", "Login");
+        return "user/login";
     }
 
 
