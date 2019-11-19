@@ -1,4 +1,4 @@
-package org.launchcode.trailerqueen.controller;
+package org.launchcode.trailerqueen.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HelloTestController {
 
-    @RequestMapping(value = "")
+    @RequestMapping(value = "hello")
     @ResponseBody
     public String index() {
-        return "Hello World!";
+        return "Hello Cruel World";
     }
 }
