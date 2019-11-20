@@ -46,12 +46,33 @@ public class UserController {
         return "redirect:";
     }
 
-//    @RequestMapping(value = "login", method = RequestMethod.GET)
-//    public String displayLoginForm(Model model) {
-//
-//        model.addAttribute("title", "Login");
-//        return "user/login";
-//    }
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String displayLoginForm(Model model) {
+
+        model.addAttribute("title", "Login");
+        return "user/login";
+    }
+
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @ResponseBody
+    public User processLoginForm(Model model, @RequestParam String username,
+                                 @RequestParam String password) {
+
+
+        Iterable<User> users = userDao.findAll();
+        
+        User verified = null;
+        
+
+        for (User user : users) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                verified = user;
+            }
+        }
+        return verified;
+
+    }
+
 
 
 }
