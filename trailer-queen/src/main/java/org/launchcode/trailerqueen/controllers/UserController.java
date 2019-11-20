@@ -10,26 +10,48 @@ import org.launchcode.trailerqueen.models.data.UserDao;
 
 import javax.validation.Valid;
 
+
 @Controller
 public class UserController {
 
     @Autowired
     private UserDao userDao;
 
-    @RequestMapping(value = "add-user", method = RequestMethod.GET)
-    public String displayCreateUserForm(Model model) {
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String index(Model model){
+
+        model.addAttribute("title", "Welcome");
+        return "user/welcome";
+    }
+
+    @RequestMapping(value = "register", method = RequestMethod.GET)
+    public String displayRegisterForm(Model model) {
 
         model.addAttribute("title", "Create Account");
         model.addAttribute(new User());
-        return "user/addUser";
+        return "user/register";
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.GET)
-    public String displayLoginForm(Model model) {
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    public String processRegisterForm(@ModelAttribute @Valid User newUser,
+                                      Errors errors, Model model) {
 
-        model.addAttribute("title", "Login");
-        return "user/login";
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Create Account");
+//            model.addAttribute(new User());
+            return "user/register";
+        }
+
+        userDao.save(newUser);
+        return "redirect:";
     }
+
+//    @RequestMapping(value = "login", method = RequestMethod.GET)
+//    public String displayLoginForm(Model model) {
+//
+//        model.addAttribute("title", "Login");
+//        return "user/login";
+//    }
 
 
 }
