@@ -43,6 +43,8 @@ public class UserController {
         }
 
         userDao.save(newUser);
+
+        model.addAttribute("title", "Welcome");
         return "redirect:";
     }
 
@@ -54,8 +56,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    @ResponseBody
-    public User processLoginForm(Model model, @RequestParam String username,
+    public String processLoginForm(Model model, @RequestParam String username,
                                  @RequestParam String password) {
 
 
@@ -69,7 +70,10 @@ public class UserController {
                 verified = user;
             }
         }
-        return verified;
+
+        model.addAttribute("title", "Welcome");
+        model.addAttribute("user", verified.getUsername());
+        return "user/welcome";
 
     }
 
