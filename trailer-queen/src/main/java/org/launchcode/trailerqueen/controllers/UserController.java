@@ -8,6 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.launchcode.trailerqueen.models.data.UserDao;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 
@@ -59,11 +60,9 @@ public class UserController {
     public String processLoginForm(Model model, @RequestParam String username,
                                  @RequestParam String password) {
 
-
         Iterable<User> users = userDao.findAll();
         
         User verified = null;
-        
 
         for (User user : users) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
