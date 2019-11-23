@@ -1,45 +1,37 @@
 package org.launchcode.trailerqueen.models;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotNull
-    @Size(min=5, max=20, message = "password issue")
-    private String username;
-
-    @NotNull
-    @Size(min=8, max=20, message = "password issue")
+    private String userName;
     private String password;
-
-    public User() {
-
-    }
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
+    private boolean active;
+    private String roles;
 
     public int getId() {
         return id;
     }
 
-    public String getUsername() {
-        return username;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -48,5 +40,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 }
