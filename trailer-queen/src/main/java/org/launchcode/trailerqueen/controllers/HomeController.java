@@ -37,7 +37,7 @@ public class HomeController {
         GeocodingResult[] results = GeocodingApi.geocode(context, zip).await();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        return gson.toJson(results[0]);
+        return gson.toJson(results[0].geometry.location);
 
     }
 }
