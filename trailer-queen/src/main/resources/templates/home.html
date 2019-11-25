@@ -7,6 +7,18 @@
 <body>
 <h1>Hello User</h1>
 <a href="/logout">Log Out</a>
+
+<div class="container-fluid">
+    <div class="row col-lg-4 col-lg-offset-4" style="margin-top: 80px;background-color:#fff;padding:20px;border:solid 1px #ddd;">
+        <!-- <img th:src="@{/images/login.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo" /> -->
+        <form method="POST" class="form-signin">
+            <h3 class="form-signin-heading" th:text="Login"></h3>
+            <br /> <input type="text" id="zip" name="zip" th:placeholder="Zipcode" class="form-control" />
+            <button class="btn btn-lg btn-primary" name="Submit" value="Search" type="Submit" th:text="Search" style="margin-right:10px;"></button>
+        </form>
+    </div>
+</div>
+
 </div>
 </body>
 </html>
