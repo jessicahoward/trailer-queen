@@ -1,32 +1,37 @@
 package org.launchcode.trailerqueen.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
+@Table(name = "auth_user")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "auth_user_id")
     private int id;
 
-    private String userName;
+    @NotNull(message = "Email is required")
+    @Email(message = "Please enter a valid email address")
+    @Column(name = "email")
+    private String email;
+
+    @NotNull
+    @Size(min = 5, message = "Password must be at least 5 characters")
+    @Column(name = "password")
     private String password;
-    private boolean active;
-    private String roles;
 
-    public User() {
-    }
+    @Column(name = "status")
+    private String status;
 
-    public User(String userName, String password, boolean active, String roles) {
-        this.userName = userName;
-        this.password = password;
-        this.active = true;
-        this.roles = "USER";
-    }
+    @ManyToMany(cascade =  CascadeType.ALL)
+    @JoinTable(name = "auth_user_role", joinColumns = @JoinColumn(name = "auth_user_id"), inverseJoinColumns = @JoinColumn(name = "auth_role_id"))
+    private Set<Role> roles;
 
     public int getId() {
         return id;
@@ -36,12 +41,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -52,19 +57,19 @@ public class User {
         this.password = password;
     }
 
-    public boolean isActive() {
-        return active;
+    public String getStatus() {
+        return status;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(String roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 }
