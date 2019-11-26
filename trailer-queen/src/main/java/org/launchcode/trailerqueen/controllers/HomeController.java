@@ -3,10 +3,13 @@ package org.launchcode.trailerqueen.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.GeocodingResult;
+import com.mashape.unirest.http.HttpMethod;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -14,6 +17,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.params.CookiePolicy;
 import org.apache.http.client.params.HttpClientParams;
+import org.hibernate.validator.internal.util.privilegedactions.GetMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +51,8 @@ public class HomeController {
         String latDegree = gson.toJson(results[0].geometry.location.lat);
         String longDegree = gson.toJson(results[0].geometry.location.lng);
 //        TODO 1: use lat/long and any additional RequestParams to access dbraap API
-//        TODO 2: return dbraap results
+//        TODO 2: return dbraap results - GOT IT!
+//        TODO 3: nail down query params
 
         String host = "https://brappdbv2.p.rapidapi.com/Parks";
         String charset = "UTF-8";
@@ -61,16 +66,21 @@ public class HomeController {
 //        ####################################################
 //        ####################################################
 
-        HttpResponse<JsonNode> response = Unirest.get(host + "?" + query)
+        HttpResponse<JsonNode> response = Unirest.get(host + "?isOpen=true")
                 .header("x-rapidapi-host", xRapidApiHost)
                 .header("x-rapidapi-key", xRapidApiKey)
                 .header("authorization", authorization)
                 .asJson();
 
+        Gson anotherGson = new GsonBuilder().setPrettyPrinting().create();
+        JsonElement je = JsonParser.parseString(response.getBody().toString());
+        String prettyJsonString = anotherGson.toJson(je);
 
-        System.out.println(response.getStatus());
-        System.out.println(response.getHeaders().get("Content-Type"));
-        return latDegree + " " + longDegree;
+
+//        System.out.println(response.getStatus());
+//        System.out.println(response.getHeaders().get("Content-Type"));
+        return prettyJsonString;
+//        return latDegree + " " + longDegree;
 
 
     }
