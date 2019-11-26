@@ -38,7 +38,11 @@ public class HomeController {
 
     @RequestMapping(value = "home", method = RequestMethod.POST)
     @ResponseBody
-    public String processHome(Model model, @RequestParam String zip) throws InterruptedException, ApiException, IOException, UnirestException {
+    public String processHome(Model model, @RequestParam String zip,
+                              @RequestParam String dist,
+                              @RequestParam String vehicle,
+                              @RequestParam String experience,
+                              @RequestParam String terrain) throws InterruptedException, ApiException, IOException, UnirestException {
 
         String locationSearchParam = zip;
 
@@ -50,9 +54,7 @@ public class HomeController {
 
         String latDegree = gson.toJson(results[0].geometry.location.lat);
         String longDegree = gson.toJson(results[0].geometry.location.lng);
-//        TODO 1: use lat/long and any additional RequestParams to access dbraap API
-//        TODO 2: return dbraap results - GOT IT!
-//        TODO 3: nail down query params
+//        TODO 4: HIDE YOUR API KEYS DUMMY
 
         String host = "https://brappdbv2.p.rapidapi.com/Parks";
         String charset = "UTF-8";
@@ -60,13 +62,17 @@ public class HomeController {
         String xRapidApiKey = "daJQtrmBjimshXqYFh1HBrEKaQZop1ERXVXjsnp8CgR0U1Me4u";
         String authorization = "DEj1j3JKBjzFIjN2rdAdTec8c40tNjuozluyfOQOjBw";
 
-        String s = "Hardrock Cycle Park";
-        String query = String.format("s=%s", URLEncoder.encode(s, charset));
+        String alwaysOpen = "isOpen=true";
+        String distance = "dist=" + dist ;
+        String allowed = "allowedvehicles=" + vehicle;
+        String expLevel = "ExperienceLevel=" + experience;
+        String obstacles = "TerrainHas" + terrain;
+        String query = allowed + "&" + expLevel + "&" + obstacles + "&" + alwaysOpen + "&" + "lat=" + latDegree + "&" + "lng=" + longDegree + "&" + distance;
 
 //        ####################################################
 //        ####################################################
 
-        HttpResponse<JsonNode> response = Unirest.get(host + "?isOpen=true")
+        HttpResponse<JsonNode> response = Unirest.get(host + "?" + query)
                 .header("x-rapidapi-host", xRapidApiHost)
                 .header("x-rapidapi-key", xRapidApiKey)
                 .header("authorization", authorization)
@@ -85,3 +91,5 @@ public class HomeController {
 
     }
 }
+
+//allowedvehicles=jeep&ExperienceLevel=beginner&TerrainHas=Mud&IsOpen=true&lat=28.1902421&lng=-82.76707449999999&dist=100
