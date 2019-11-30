@@ -11,7 +11,6 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import jdk.nashorn.internal.parser.JSONParser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,8 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
 
 
 @Controller
@@ -74,22 +71,17 @@ public class HomeController {
         Gson anotherGson = new GsonBuilder().setPrettyPrinting().create();
         JsonElement je = JsonParser.parseString(response.getBody().toString());
         String prettyJsonString = anotherGson.toJson(je);
-//
-        JSONObject obj = new JSONObject(response.getBody().toString());
-//        System.out.println("************" + obj.getJSONArray("data"));
 
-        
+        JSONObject obj = new JSONObject(response.getBody().toString());
+
         JSONArray stuff = (JSONArray) obj.getJSONArray("data");
         for (int i = 0; i < stuff.length(); i++) {
             String name = stuff.getJSONObject(i).getString("Name");
             String desc = stuff.getJSONObject(i).getString("Desc");
-//            String permittedVehicles = stuff.getJSONObject(i).getString("permittedVehicles");
             System.out.println("********************" + name);
             System.out.println("********************" + desc);
 
-//            System.out.println("********************" + permittedVehicles);
         }
-//        System.out.println("************" + stuff);
 
         return prettyJsonString;
 
