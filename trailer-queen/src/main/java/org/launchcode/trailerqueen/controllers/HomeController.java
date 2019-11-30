@@ -1,23 +1,20 @@
 package org.launchcode.trailerqueen.controllers;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.GeocodingResult;
-import com.mashape.unirest.http.HttpMethod;
+
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.params.CookiePolicy;
-import org.apache.http.client.params.HttpClientParams;
-import org.hibernate.validator.internal.util.privilegedactions.GetMethod;
+import jdk.nashorn.internal.parser.JSONParser;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +23,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
-import java.net.URLEncoder;
+import java.util.Iterator;
+import java.util.List;
+
 
 @Controller
 public class HomeController {
@@ -42,9 +41,7 @@ public class HomeController {
                               @RequestParam String dist,
                               @RequestParam String vehicle,
                               @RequestParam String experience,
-                              @RequestParam String terrain) throws InterruptedException, ApiException, IOException, UnirestException {
-
-        String locationSearchParam = zip;
+                              @RequestParam String terrain) throws InterruptedException, ApiException, IOException, UnirestException, JSONException {
 
         GeoApiContext context = new GeoApiContext.Builder()
                 .apiKey("AIzaSyC6urX1HiPnH_DH0Miwbaz3Ce2htxSS-68")
@@ -57,7 +54,6 @@ public class HomeController {
 //        TODO 4: HIDE YOUR API KEYS DUMMY
 
         String host = "https://brappdbv2.p.rapidapi.com/Parks";
-        String charset = "UTF-8";
         String xRapidApiHost = "brappdbv2.p.rapidapi.com";
         String xRapidApiKey = "daJQtrmBjimshXqYFh1HBrEKaQZop1ERXVXjsnp8CgR0U1Me4u";
         String authorization = "DEj1j3JKBjzFIjN2rdAdTec8c40tNjuozluyfOQOjBw";
@@ -69,9 +65,6 @@ public class HomeController {
         String obstacles = "TerrainHas" + terrain;
         String query = allowed + "&" + expLevel + "&" + obstacles + "&" + alwaysOpen + "&" + "lat=" + latDegree + "&" + "lng=" + longDegree + "&" + distance;
 
-//        ####################################################
-//        ####################################################
-
         HttpResponse<JsonNode> response = Unirest.get(host + "?" + query)
                 .header("x-rapidapi-host", xRapidApiHost)
                 .header("x-rapidapi-key", xRapidApiKey)
@@ -81,15 +74,25 @@ public class HomeController {
         Gson anotherGson = new GsonBuilder().setPrettyPrinting().create();
         JsonElement je = JsonParser.parseString(response.getBody().toString());
         String prettyJsonString = anotherGson.toJson(je);
+//
+        JSONObject obj = new JSONObject(response.getBody().toString());
+//        System.out.println("************" + obj.getJSONArray("data"));
 
+        
+        JSONArray stuff = (JSONArray) obj.getJSONArray("data");
+        for (int i = 0; i < stuff.length(); i++) {
+            String name = stuff.getJSONObject(i).getString("Name");
+            String desc = stuff.getJSONObject(i).getString("Desc");
+//            String permittedVehicles = stuff.getJSONObject(i).getString("permittedVehicles");
+            System.out.println("********************" + name);
+            System.out.println("********************" + desc);
 
-//        System.out.println(response.getStatus());
-//        System.out.println(response.getHeaders().get("Content-Type"));
+//            System.out.println("********************" + permittedVehicles);
+        }
+//        System.out.println("************" + stuff);
+
         return prettyJsonString;
-//        return latDegree + " " + longDegree;
-
 
     }
 }
 
-//allowedvehicles=jeep&ExperienceLevel=beginner&TerrainHas=Mud&IsOpen=true&lat=28.1902421&lng=-82.76707449999999&dist=100
