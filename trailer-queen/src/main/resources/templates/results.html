@@ -3,9 +3,6 @@
 <head>
     <meta charset="UTF-8"/>
     <title></title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6urX1HiPnH_DH0Miwbaz3Ce2htxSS-68&callback=initMap"
-            async defer></script>
-
 </head>
 <body class="container" onload="initMap()" onunload="GUnload()">
 
@@ -28,13 +25,29 @@
 
       var baseLat = [[${baseLat}]];
       var baseLng = [[${baseLng}]];
+      var parkLocations = [[${locations}]];
 
       var map;
+      var marker;
+      var parkLatLng;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: parseInt(baseLat), lng: parseInt(baseLng)},
-          zoom: 10
+          center: {lat: parseFloat(baseLat), lng: parseFloat(baseLng)},
+          zoom: 6
         });
+
+       for (i = 0; i < parkLocations.length; i++) {
+        var tag = toString(i + 1);
+        var latt = parseFloat(parkLocations[i].latitude);
+        var long = parseFloat(parkLocations[i].longitude);
+        parkLatLng = {lat: latt, lng: long};
+
+        marker = new google.maps.Marker({
+            position: parkLatLng,
+            map: map,
+            title: tag
+        });
+       }
       }
     </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6urX1HiPnH_DH0Miwbaz3Ce2htxSS-68&callback=initMap"

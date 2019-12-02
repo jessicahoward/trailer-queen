@@ -13,6 +13,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.launchcode.trailerqueen.models.Location;
 import org.launchcode.trailerqueen.models.Park;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -83,6 +84,7 @@ public class HomeController {
         JSONObject type;
         JSONObject level;
 
+        ArrayList<Location> locationList = new ArrayList<>();
         ArrayList<Park> resultsList = new ArrayList<>();
         JSONArray stuff = (JSONArray) obj.getJSONArray("data");
         for (int i = 0; i < stuff.length(); i++) {
@@ -95,18 +97,15 @@ public class HomeController {
             type = stuff.getJSONObject(i).getJSONObject("permittedVehicles");
             level = stuff.getJSONObject(i).getJSONObject("experienceLevel");
 
+            Location alocation = new Location(parkLat, parkLng);
+            locationList.add(alocation);
             Park aPark = new Park(name, desc, parkLat, parkLng, hazards, type, level);
             resultsList.add(aPark);
         }
-
-        for (Park park: resultsList) {
-            System.out.println("############ " + park.getName());
-        }
-        System.out.println("***********" + googLat);
-        System.out.println("***********" + googLng);
-
+        
         model.addAttribute("baseLat", googLat);
         model.addAttribute("baseLng", googLng);
+        model.addAttribute("locations", locationList);
         model.addAttribute("parks", resultsList);
         return "results";
 
