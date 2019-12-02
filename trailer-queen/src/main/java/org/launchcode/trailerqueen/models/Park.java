@@ -20,6 +20,8 @@ public class Park {
 
     private String longitude;
 
+    private int code;
+
     private JSONObject listedTerrain;
 
     private JSONObject allowedVehicles;
@@ -29,7 +31,7 @@ public class Park {
     public Park() {
     }
 
-    public Park(String name, String description, String latitude, String longitude, JSONObject listedTerrain, JSONObject allowedVehicles, JSONObject experienceLevel) {
+    public Park(String name, String description, String latitude, String longitude, int code, JSONObject listedTerrain, JSONObject allowedVehicles, JSONObject experienceLevel) {
         this.name = name;
         this.description = description;
         this.latitude = latitude;
@@ -77,6 +79,14 @@ public class Park {
 
     public void setLongitude(String longitude) {
         this.longitude = longitude;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public JSONObject getListedTerrain() {

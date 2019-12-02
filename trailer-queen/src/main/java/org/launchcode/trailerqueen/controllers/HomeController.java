@@ -70,16 +70,14 @@ public class HomeController {
                 .header("authorization", authorization)
                 .asJson();
 
-        Gson anotherGson = new GsonBuilder().setPrettyPrinting().create();
-        JsonElement je = JsonParser.parseString(response.getBody().toString());
-        String prettyJsonString = anotherGson.toJson(je);
-
         JSONObject obj = new JSONObject(response.getBody().toString());
 
         String name;
         String desc;
+        String shortDesc;
         String parkLat;
         String parkLng;
+        int parkCode;
         JSONObject hazards;
         JSONObject type;
         JSONObject level;
@@ -90,8 +88,10 @@ public class HomeController {
         for (int i = 0; i < stuff.length(); i++) {
             name = stuff.getJSONObject(i).getString("Name");
             desc = stuff.getJSONObject(i).getString("Desc");
+            shortDesc = desc.substring(0, 100) + "...";
             parkLat = stuff.getJSONObject(i).getString("Lat");
             parkLng = stuff.getJSONObject(i).getString("Lng");
+            parkCode = stuff.getJSONObject(i).getInt("Id");
 //            TODO: What to do with these objects?
             hazards = stuff.getJSONObject(i).getJSONObject("terrain");
             type = stuff.getJSONObject(i).getJSONObject("permittedVehicles");
@@ -99,10 +99,14 @@ public class HomeController {
 
             Location alocation = new Location(parkLat, parkLng);
             locationList.add(alocation);
-            Park aPark = new Park(name, desc, parkLat, parkLng, hazards, type, level);
+            Park aPark = new Park(name, shortDesc, parkLat, parkLng, parkCode, hazards, type, level);
+//            System.out.println(parkCode);
             resultsList.add(aPark);
         }
-        
+
+        model.addAttribute("selectedVehicle", vehicle);
+        model.addAttribute("selectedExperience", experience);
+        model.addAttribute("selectedTerrain", terrain);
         model.addAttribute("baseLat", googLat);
         model.addAttribute("baseLng", googLng);
         model.addAttribute("locations", locationList);
@@ -111,4 +115,3 @@ public class HomeController {
 
     }
 }
-

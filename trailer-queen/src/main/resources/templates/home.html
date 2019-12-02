@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title></title>
+
 </head>
 <body>
 <h1>Hello User</h1>
@@ -16,7 +17,6 @@
             <br /> <input type="text" id="zip" name="zip" th:placeholder="Zipcode" class="form-control" />
             <br />
             <select name="vehicle">
-                <option th:text="All" th:value="All"></option>
                 <option th:text="Motorcycles" th:value="Motorcycles"></option>
                 <option th:text="Jeep" th:value="Jeep"></option>
                 <option th:text="SxS" th:value="SxS"></option>
@@ -25,7 +25,6 @@
             </select>
             <br />
             <select name="experience">
-                <option th:text="All" th:value="All"></option>
                 <option th:text="Beginner" th:value="beginner"></option>
                 <option th:text="Intermediate" th:value="intermediate"></option>
                 <option th:text="Advanced" th:value="advanced"></option>
@@ -33,17 +32,15 @@
             </select>
             <br />
             <select name="terrain">
-                <option th:text="All" th:value="All"></option>
-                <option th:text="RhythmSection" th:value="RhythmSection"></option>
+                <option th:value="RhythmSection">Rhythm Section</option>
                 <option th:text="Roots" th:value="Roots"></option>
                 <option th:text="Mud" th:value="Mud"></option>
                 <option th:text="Sand" th:value="Sand"></option>
                 <option th:text="Jumps" th:value="Sand"></option>
-                <option th:text="HillClimbs" th:value="HillClimbs"></option>
-                <option th:text="HardPack" th:value="HardPack"></option>
+                <option th:value="HillClimbs">Hill Climbs</option>
+                <option th:value="HardPack">Hard Pack</option>
                 <option th:text="Gravel" th:value="Gravle"></option>
-                <option th:text="LargeLooseRocks" th:value="LargeLooseRocks"></option>
-                <option th:text="Other" th:value="OtherHazards"></option>
+                <option th:value="LargeLooseRocks">Loose Rocks</option>
             </select>
             <br />
             <select name="dist">
