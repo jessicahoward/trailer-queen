@@ -19,11 +19,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class HomeController {
@@ -50,6 +48,7 @@ public class HomeController {
 
         String googLat = gson.toJson(results[0].geometry.location.lat);
         String googLng = gson.toJson(results[0].geometry.location.lng);
+
 //        TODO : HIDE YOUR API KEYS DUMMY!!
 
         String host = "https://brappdbv2.p.rapidapi.com/Parks";
@@ -98,23 +97,18 @@ public class HomeController {
 
             Park aPark = new Park(name, desc, parkLat, parkLng, hazards, type, level);
             resultsList.add(aPark);
-//            System.out.println("********NAME********" + name);
-//            System.out.println("********LAT*********" + parkLat);
-//            System.out.println("********LNG*********" + parkLng);
-//            System.out.println("********DESC********" + desc);
-//            System.out.println("******TERRAIN*******" + hazards);
-//            System.out.println("******ALLOWED*******" + type);
-//            System.out.println("*********EXP********" + level);
         }
 
         for (Park park: resultsList) {
-            System.out.println("############ " + park.getAllowedVehicles());
+            System.out.println("############ " + park.getName());
         }
+        System.out.println("***********" + googLat);
+        System.out.println("***********" + googLng);
 
+        model.addAttribute("baseLat", googLat);
+        model.addAttribute("baseLng", googLng);
         model.addAttribute("parks", resultsList);
         return "results";
-
-//        return prettyJsonString;
 
     }
 }

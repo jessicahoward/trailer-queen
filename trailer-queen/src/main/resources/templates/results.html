@@ -3,19 +3,11 @@
 <head>
     <meta charset="UTF-8"/>
     <title></title>
-    <script src="//maps.google.com/maps?file=api&amp;amp;amp;amp;v=2&amp;amp;amp;amp;sensor=false&amp;amp;amp;amp;key=ABQIAAAAzr2EBOXUKnm_jVnk0OJI7xSosDVG8KKPE1-m51RBrvYughuyMxQ-i1QfUnH94QxWIa6N4U6MouMmBA"
-            type="text/javascript"></script>
-    <script type="text/javascript">
-function initialize() {
-      if (GBrowserIsCompatible()) {
-        var map = new GMap2(document.getElementById("map_canvas"));
-        map.setCenter(new GLatLng(37.4419, -122.1419), 13);
-      }
-}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6urX1HiPnH_DH0Miwbaz3Ce2htxSS-68&callback=initMap"
+            async defer></script>
 
-    </script>
 </head>
-<body class="container" onload="initialize()" onunload="GUnload()">
+<body class="container" onload="initMap()" onunload="GUnload()">
 
 <table class="table">
 
@@ -31,6 +23,22 @@ function initialize() {
 
 </table>
 
-<div id="map_canvas" style="width: 500px; height: 300px"></div>
+<div id="map" style="width: 500px; height: 300px"></div>
+<script th:inline="javascript">
+
+      var baseLat = [[${baseLat}]];
+      var baseLng = [[${baseLng}]];
+
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: parseInt(baseLat), lng: parseInt(baseLng)},
+          zoom: 10
+        });
+      }
+    </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6urX1HiPnH_DH0Miwbaz3Ce2htxSS-68&callback=initMap"
+        async defer></script>
+
 </body>
 </html>
