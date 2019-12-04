@@ -36,6 +36,7 @@ public class Park {
         this.description = description;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.code = code;
         this.listedTerrain = listedTerrain;
         this.allowedVehicles = allowedVehicles;
         this.experienceLevel = experienceLevel;
