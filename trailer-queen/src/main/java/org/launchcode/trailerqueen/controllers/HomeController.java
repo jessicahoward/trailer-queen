@@ -34,7 +34,7 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping(value = "home", method = RequestMethod.POST)
+    @RequestMapping(value = "results", method = RequestMethod.POST)
     public String processHome(Model model, @RequestParam String zip,
                               @RequestParam String dist,
                               @RequestParam String vehicle,
@@ -50,7 +50,7 @@ public class HomeController {
         String googLat = gson.toJson(results[0].geometry.location.lat);
         String googLng = gson.toJson(results[0].geometry.location.lng);
 
-//        TODO : HIDE YOUR API KEYS DUMMY!!
+//        TODO : BONUS! HIDE YOUR API KEYS DUMMY!!
 
         String host = "https://brappdbv2.p.rapidapi.com/Parks";
         String xRapidApiHost = "brappdbv2.p.rapidapi.com";
