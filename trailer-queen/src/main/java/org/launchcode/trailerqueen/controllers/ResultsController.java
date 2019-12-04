@@ -7,7 +7,6 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.launchcode.trailerqueen.models.Location;
 import org.launchcode.trailerqueen.models.Park;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,7 +63,6 @@ public class ResultsController {
             aPark = new Park(name, desc, parkLat, parkLng, parkCode, hazards, type, level);
     }
 
-//        model.addAttribute("response", detailedInfo);
         model.addAttribute("park", aPark);
         return "park-view";
     }

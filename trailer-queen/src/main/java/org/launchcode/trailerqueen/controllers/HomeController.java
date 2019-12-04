@@ -100,12 +100,6 @@ public class HomeController {
             Location alocation = new Location(parkLat, parkLng);
             locationList.add(alocation);
             Park aPark = new Park(name, shortDesc, parkLat, parkLng, parkCode, hazards, type, level);
-            System.out.println(name);
-            System.out.println(shortDesc);
-            System.out.println(parkCode);
-            System.out.println(hazards);
-            System.out.println(type);
-            System.out.println(level);
             resultsList.add(aPark);
         }
 
