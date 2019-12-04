@@ -7,6 +7,8 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.launchcode.trailerqueen.models.Location;
+import org.launchcode.trailerqueen.models.Park;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,26 +48,24 @@ public class ResultsController {
         JSONObject hazards;
         JSONObject type;
         JSONObject level;
+        Park aPark = null;
 
         JSONArray detailedInfo = (JSONArray) obj.getJSONArray("data");
-//        for (int i = 0; i < detailedInfo.length(); i++) {
-//            name = detailedInfo.getJSONObject(i).getString("Name");
-//            desc = detailedInfo.getJSONObject(i).getString("Desc");
-//            parkLat = detailedInfo.getJSONObject(i).getString("Lat");
-//            parkLng = detailedInfo.getJSONObject(i).getString("Lng");
-//            parkCode = detailedInfo.getJSONObject(i).getInt("Id");
-//            hazards = detailedInfo.getJSONObject(i).getJSONObject("terrain");
-//            type = detailedInfo.getJSONObject(i).getJSONObject("permittedVehicles");
-//            level = detailedInfo.getJSONObject(i).getJSONObject("experienceLevel");
-//
-//
-//    }
-//        Location alocation = new Location(parkLat, parkLng);
-//        Park aPark = new Park(name, desc, parkLat, parkLng, parkCode, hazards, type, level);
+        for (int i = 0; i < detailedInfo.length(); i++) {
+            name = detailedInfo.getJSONObject(i).getString("Name");
+            desc = detailedInfo.getJSONObject(i).getString("Desc");
+            parkLat = detailedInfo.getJSONObject(i).getString("Lat");
+            parkLng = detailedInfo.getJSONObject(i).getString("Lng");
+            parkCode = detailedInfo.getJSONObject(i).getInt("Id");
+            hazards = detailedInfo.getJSONObject(i).getJSONObject("terrain");
+            type = detailedInfo.getJSONObject(i).getJSONObject("permittedVehicles");
+            level = detailedInfo.getJSONObject(i).getJSONObject("experienceLevel");
 
-//                model.addAttribute("location", alocation);
-//        model.addAttribute("park", aPark);
-        model.addAttribute("response", detailedInfo);
+            aPark = new Park(name, desc, parkLat, parkLng, parkCode, hazards, type, level);
+    }
+
+//        model.addAttribute("response", detailedInfo);
+        model.addAttribute("park", aPark);
         return "park-view";
     }
 }
