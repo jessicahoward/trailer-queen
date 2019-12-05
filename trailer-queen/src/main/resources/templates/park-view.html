@@ -9,12 +9,15 @@
 
 <h1 th:text="${park.name}"></h1>
 <p th:text="${park.description}"></p>
-<p th:text="${park.latitude}"></p>
-<p th:text="${park.longitude}"></p>
-<p th:text="${park.code}"></p>
 <p th:text="${park.listedTerrain}"></p>
 <p th:text="${park.allowedVehicles}"></p>
 <p th:text="${park.experienceLevel}"></p>
+
+<div class="container">
+    <ul>
+        <li th:each="day : ${forecast}" th:text="${day.highTemp}"></li>
+    </ul>
+</div>
 
 </div>
 </body>

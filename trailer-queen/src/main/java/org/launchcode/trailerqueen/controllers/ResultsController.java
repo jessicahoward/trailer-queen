@@ -8,11 +8,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.launchcode.trailerqueen.models.Park;
+import org.launchcode.trailerqueen.models.Weather;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
 
 @Controller
 public class ResultsController {
@@ -41,8 +44,8 @@ public class ResultsController {
 
         String name;
         String desc;
-        String parkLat;
-        String parkLng;
+        String parkLat = null;
+        String parkLng = null;
         int parkCode;
         JSONObject hazards;
         JSONObject type;
@@ -63,7 +66,37 @@ public class ResultsController {
             aPark = new Park(name, desc, parkLat, parkLng, parkCode, hazards, type, level);
     }
 
+        String weatherURL = "https://dark-sky.p.rapidapi.com/" + parkLat + "," + parkLng + "?lang=en&units=auto&exclude=minutely%252Chourly%252Calerts%252Cflags";
+        HttpResponse<JsonNode> weatherResponse = Unirest.get(weatherURL)
+                .header("x-rapidapi-host", "dark-sky.p.rapidapi.com")
+                .header("x-rapidapi-key", "daJQtrmBjimshXqYFh1HBrEKaQZop1ERXVXjsnp8CgR0U1Me4u")
+                .asJson();
+
+        JSONObject weatherObj = new JSONObject(weatherResponse.getBody().toString());
+        JSONArray weatherDetails = (JSONArray) weatherObj.getJSONObject("daily").getJSONArray("data");
+
+        Double highTemp;
+        Double lowTemp;
+        String outlook;
+        Double rainChance;
+        String image;
+
+        ArrayList<Weather> weatherList = new ArrayList<>();
+        for (int i = 0; i < weatherDetails.length(); i++) {
+            highTemp = weatherDetails.getJSONObject(i).getDouble("temperatureMax");
+            lowTemp = weatherDetails.getJSONObject(i).getDouble("temperatureLow");
+            outlook = weatherDetails.getJSONObject(i).getString("summary");
+            rainChance = weatherDetails.getJSONObject(i).getDouble("precipProbability");
+            image = weatherDetails.getJSONObject(i).getString("icon");
+
+            Weather someWeather = new Weather(highTemp, lowTemp, outlook, rainChance, image);
+            weatherList.add(someWeather);
+        }
+
+
+
         model.addAttribute("park", aPark);
+        model.addAttribute("forecast", weatherList);
         return "park-view";
     }
 }
