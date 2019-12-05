@@ -2,6 +2,9 @@ package org.launchcode.trailerqueen.models;
 
 public class Weather {
 
+    private int weatherId;
+    private static int nextId = 1;
+
     private Double highTemp;
 
     private Double lowTemp;
@@ -13,14 +16,25 @@ public class Weather {
     private String displayImage;
 
     public Weather() {
+        weatherId = nextId;
+        nextId++;
     }
 
     public Weather(Double highTemp, Double lowTemp, String forecastSummary, Double precipChance, String displayImage) {
+        this();
         this.highTemp = highTemp;
         this.lowTemp = lowTemp;
         this.forecastSummary = forecastSummary;
         this.precipChance = precipChance;
         this.displayImage = displayImage;
+    }
+
+    public int getWeatherId() {
+        return weatherId;
+    }
+
+    public void setWeatherId(int weatherId) {
+        this.weatherId = weatherId;
     }
 
     public Double getHighTemp() {
