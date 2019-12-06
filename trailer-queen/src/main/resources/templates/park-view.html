@@ -4,7 +4,6 @@
     <meta charset="UTF-8"/>
     <title></title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/skycons/1396634940/skycons.min.js"></script>
-
 </head>
 <body>
 
@@ -19,7 +18,7 @@
         <div class="card-body">
             <p class="card-title" th:text="${day.displayImage}"></p>
             <p class="card-text" th:text="${day.weatherId}"></p>
-<!--            <canvas th:id="'icon' + ${day.weatherId}"></canvas>-->
+            <img th:src="'images/' + ${day.displayImage} + '.png'" alt="">
             <p class="card-text" th:text="${day.forecastSummary}"></p>
             <p class="card-text" th:text="${day.highTemp}"></p>
             <p class="card-text" th:text="${day.lowTemp}"></p>
@@ -27,22 +26,6 @@
         </div>
     </div>
 </div>
-
-<script th:inline="javascript">
-
-    var weatherIcons = [[${onlyIcons}]];
-    console.log(weatherIcons);
-    var count = 1;
-    var eachId = "icon" + count;
-    for (i = 0; i < weatherIcons.length; i++) {
-        var description = weatherIcons[i];
-        var eachId = "icon" + count;
-        var skycons = new Skycons();
-        skycons.add(document.getElementById(eachId), Skycons.CLEAR_DAY);
-        count++;
-    }
-
-</script>
 
 </div>
 <script></script>

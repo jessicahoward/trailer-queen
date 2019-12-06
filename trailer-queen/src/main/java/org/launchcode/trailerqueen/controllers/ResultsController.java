@@ -80,9 +80,9 @@ public class ResultsController {
         String outlook;
         Double rainChance;
         String image;
+        Weather someWeather = null;
 
         ArrayList<Weather> weatherList = new ArrayList<>();
-        ArrayList<String> imageList = new ArrayList<>();
         for (int i = 0; i < weatherDetails.length(); i++) {
             highTemp = weatherDetails.getJSONObject(i).getDouble("temperatureMax");
             lowTemp = weatherDetails.getJSONObject(i).getDouble("temperatureLow");
@@ -90,14 +90,10 @@ public class ResultsController {
             rainChance = weatherDetails.getJSONObject(i).getDouble("precipProbability");
             image = weatherDetails.getJSONObject(i).getString("icon").replace("-", "_").toUpperCase();
 
-            Weather someWeather = new Weather(highTemp, lowTemp, outlook, rainChance, image);
+            someWeather = new Weather(highTemp, lowTemp, outlook, rainChance, image);
             weatherList.add(someWeather);
-            imageList.add(image);
         }
 
-
-
-        model.addAttribute("onlyIcons", imageList);
         model.addAttribute("park", aPark);
         model.addAttribute("forecast", weatherList);
         return "park-view";
