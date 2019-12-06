@@ -79,7 +79,6 @@ public class ResultsController {
         int highTemp;
         double lowTempDouble;
         int lowTemp;
-        String outlook;
         double rainChance;
         int percentage;
         String image;
@@ -91,12 +90,11 @@ public class ResultsController {
             highTemp = (int)highTempDouble;
             lowTempDouble = weatherDetails.getJSONObject(i).getDouble("temperatureLow");
             lowTemp = (int)lowTempDouble;
-            outlook = weatherDetails.getJSONObject(i).getString("summary");
             rainChance = weatherDetails.getJSONObject(i).getDouble("precipProbability") * 100 ;
             image = weatherDetails.getJSONObject(i).getString("icon").replace("-", "_").toUpperCase();
             percentage = (int)rainChance;
 
-            someWeather = new Weather(highTemp, lowTemp, outlook, image, percentage);
+            someWeather = new Weather(highTemp, lowTemp, image, percentage);
             weatherList.add(someWeather);
         }
 

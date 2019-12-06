@@ -6,8 +6,6 @@ public class Weather {
 
     private int lowTemp;
 
-    private String forecastSummary;
-
     private String displayImage;
 
     private int precipPercentage;
@@ -15,10 +13,9 @@ public class Weather {
     public Weather() {
     }
 
-    public Weather(int highTemp, int lowTemp, String forecastSummary, String displayImage, int precipPercentage) {
+    public Weather(int highTemp, int lowTemp, String displayImage, int precipPercentage) {
         this.highTemp = highTemp;
         this.lowTemp = lowTemp;
-        this.forecastSummary = forecastSummary;
         this.displayImage = displayImage;
         this.precipPercentage = precipPercentage;
     }
@@ -37,14 +34,6 @@ public class Weather {
 
     public void setLowTemp(int lowTemp) {
         this.lowTemp = lowTemp;
-    }
-
-    public String getForecastSummary() {
-        return forecastSummary;
-    }
-
-    public void setForecastSummary(String forecastSummary) {
-        this.forecastSummary = forecastSummary;
     }
 
     public String getDisplayImage() {

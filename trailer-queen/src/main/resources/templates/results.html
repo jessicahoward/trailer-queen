@@ -15,9 +15,7 @@
     <div class="card" style="width: 18rem;">
         <div class="card-body">
             <a href="#" class="card-link"><h5 class="card-title" th:text="${park.name}"></h5></a>
-            <h6 class="card-subtitle mb-2 text-muted" th:text="${selectedVehicle}"></h6>
             <p class="card-text" th:text="${park.description}"></p>
-            <p th:text="${park.code}"></p>
             <form method="POST", action="/park-view">
                 <input type="hidden" name="code" th:value="${park.code}">
                 <input type="submit"  th:value="More">
