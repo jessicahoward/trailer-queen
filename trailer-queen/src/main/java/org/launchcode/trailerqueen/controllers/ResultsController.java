@@ -75,22 +75,28 @@ public class ResultsController {
         JSONObject weatherObj = new JSONObject(weatherResponse.getBody().toString());
         JSONArray weatherDetails = (JSONArray) weatherObj.getJSONObject("daily").getJSONArray("data");
 
-        Double highTemp;
-        Double lowTemp;
+        double highTempDouble;
+        int highTemp;
+        double lowTempDouble;
+        int lowTemp;
         String outlook;
-        Double rainChance;
+        double rainChance;
+        int percentage;
         String image;
         Weather someWeather = null;
 
         ArrayList<Weather> weatherList = new ArrayList<>();
         for (int i = 0; i < weatherDetails.length(); i++) {
-            highTemp = weatherDetails.getJSONObject(i).getDouble("temperatureMax");
-            lowTemp = weatherDetails.getJSONObject(i).getDouble("temperatureLow");
+            highTempDouble = weatherDetails.getJSONObject(i).getDouble("temperatureMax");
+            highTemp = (int)highTempDouble;
+            lowTempDouble = weatherDetails.getJSONObject(i).getDouble("temperatureLow");
+            lowTemp = (int)lowTempDouble;
             outlook = weatherDetails.getJSONObject(i).getString("summary");
-            rainChance = weatherDetails.getJSONObject(i).getDouble("precipProbability");
+            rainChance = weatherDetails.getJSONObject(i).getDouble("precipProbability") * 100 ;
             image = weatherDetails.getJSONObject(i).getString("icon").replace("-", "_").toUpperCase();
+            percentage = (int)rainChance;
 
-            someWeather = new Weather(highTemp, lowTemp, outlook, rainChance, image);
+            someWeather = new Weather(highTemp, lowTemp, outlook, image, percentage);
             weatherList.add(someWeather);
         }
 

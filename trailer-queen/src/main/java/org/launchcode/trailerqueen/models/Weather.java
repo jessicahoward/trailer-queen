@@ -2,54 +2,40 @@ package org.launchcode.trailerqueen.models;
 
 public class Weather {
 
-    private int weatherId;
-    private static int nextId = 1;
+    private int highTemp;
 
-    private Double highTemp;
-
-    private Double lowTemp;
+    private int lowTemp;
 
     private String forecastSummary;
 
-    private Double precipChance;
-
     private String displayImage;
 
+    private int precipPercentage;
+
     public Weather() {
-        weatherId = nextId;
-        nextId++;
     }
 
-    public Weather(Double highTemp, Double lowTemp, String forecastSummary, Double precipChance, String displayImage) {
-        this();
+    public Weather(int highTemp, int lowTemp, String forecastSummary, String displayImage, int precipPercentage) {
         this.highTemp = highTemp;
         this.lowTemp = lowTemp;
         this.forecastSummary = forecastSummary;
-        this.precipChance = precipChance;
         this.displayImage = displayImage;
+        this.precipPercentage = precipPercentage;
     }
 
-    public int getWeatherId() {
-        return weatherId;
-    }
-
-    public void setWeatherId(int weatherId) {
-        this.weatherId = weatherId;
-    }
-
-    public Double getHighTemp() {
+    public int getHighTemp() {
         return highTemp;
     }
 
-    public void setHighTemp(Double highTemp) {
+    public void setHighTemp(int highTemp) {
         this.highTemp = highTemp;
     }
 
-    public Double getLowTemp() {
+    public int getLowTemp() {
         return lowTemp;
     }
 
-    public void setLowTemp(Double lowTemp) {
+    public void setLowTemp(int lowTemp) {
         this.lowTemp = lowTemp;
     }
 
@@ -61,19 +47,19 @@ public class Weather {
         this.forecastSummary = forecastSummary;
     }
 
-    public Double getPrecipChance() {
-        return precipChance;
-    }
-
-    public void setPrecipChance(Double precipChance) {
-        this.precipChance = precipChance;
-    }
-
     public String getDisplayImage() {
         return displayImage;
     }
 
     public void setDisplayImage(String displayImage) {
         this.displayImage = displayImage;
+    }
+
+    public int getPrecipPercentage() {
+        return precipPercentage;
+    }
+
+    public void setPrecipPercentage(int precipPercentage) {
+        this.precipPercentage = precipPercentage;
     }
 }
