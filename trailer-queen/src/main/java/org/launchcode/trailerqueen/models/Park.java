@@ -22,24 +22,66 @@ public class Park {
 
     private int code;
 
-    private JSONObject listedTerrain;
+    private int sand;
 
-    private JSONObject allowedVehicles;
+    private int hardPack;
 
-    private JSONObject experienceLevel;
+    private int gravle;
+
+    private int roots;
+
+    private int jumps;
+
+    private int rhythmSection;
+
+    private int largeRocks;
+
+    private  int mud;
+
+    private int hillClimb;
+
+    private boolean motorcycle;
+
+    private boolean atv;
+
+    private boolean jeep;
+
+    private boolean sxs;
+
+    private int levelBeginner;
+
+    private int levelAdvanced;
+
+    private int levelIntermediate;
+
+    private int levelExpert;
 
     public Park() {
     }
 
-    public Park(String name, String description, String latitude, String longitude, int code, JSONObject listedTerrain, JSONObject allowedVehicles, JSONObject experienceLevel) {
+    public Park(String name, String description, String latitude, String longitude, int code, int sand, int hardPack, int gravle, int roots, int jumps, int rhythmSection, int largeRocks, int mud, int hillClimb, boolean motorcycle, boolean atv, boolean jeep, boolean sxs, int levelBeginner, int levelAdvanced, int levelIntermediate, int levelExpert) {
         this.name = name;
         this.description = description;
         this.latitude = latitude;
         this.longitude = longitude;
         this.code = code;
-        this.listedTerrain = listedTerrain;
-        this.allowedVehicles = allowedVehicles;
-        this.experienceLevel = experienceLevel;
+        this.sand = sand;
+        this.hardPack = hardPack;
+        this.gravle = gravle;
+        this.roots = roots;
+        this.jumps = jumps;
+        this.rhythmSection = rhythmSection;
+        this.largeRocks = largeRocks;
+        this.mud = mud;
+        this.hillClimb = hillClimb;
+        this.motorcycle = motorcycle;
+        this.atv = atv;
+        this.jeep = jeep;
+        this.sxs = sxs;
+        this.levelBeginner = levelBeginner;
+        this.levelAdvanced = levelAdvanced;
+        this.levelIntermediate = levelIntermediate;
+        this.levelExpert = levelExpert;
     }
 
     public int getId() {
@@ -90,27 +132,139 @@ public class Park {
         this.code = code;
     }
 
-    public JSONObject getListedTerrain() {
-        return listedTerrain;
+    public int getSand() {
+        return sand;
     }
 
-    public void setListedTerrain(JSONObject listedTerrain) {
-        this.listedTerrain = listedTerrain;
+    public void setSand(int sand) {
+        this.sand = sand;
     }
 
-    public JSONObject getAllowedVehicles() {
-        return allowedVehicles;
+    public int getHardPack() {
+        return hardPack;
     }
 
-    public void setAllowedVehicles(JSONObject allowedVehicles) {
-        this.allowedVehicles = allowedVehicles;
+    public void setHardPack(int hardPack) {
+        this.hardPack = hardPack;
     }
 
-    public JSONObject getExperienceLevel() {
-        return experienceLevel;
+    public int getGravle() {
+        return gravle;
     }
 
-    public void setExperienceLevel(JSONObject experienceLevel) {
-        this.experienceLevel = experienceLevel;
+    public void setGravle(int gravle) {
+        this.gravle = gravle;
+    }
+
+    public int getRoots() {
+        return roots;
+    }
+
+    public void setRoots(int roots) {
+        this.roots = roots;
+    }
+
+    public int getJumps() {
+        return jumps;
+    }
+
+    public void setJumps(int jumps) {
+        this.jumps = jumps;
+    }
+
+    public int getRhythmSection() {
+        return rhythmSection;
+    }
+
+    public void setRhythmSection(int rhythmSection) {
+        this.rhythmSection = rhythmSection;
+    }
+
+    public int getLargeRocks() {
+        return largeRocks;
+    }
+
+    public void setLargeRocks(int largeRocks) {
+        this.largeRocks = largeRocks;
+    }
+
+    public int getMud() {
+        return mud;
+    }
+
+    public void setMud(int mud) {
+        this.mud = mud;
+    }
+
+    public int getHillClimb() {
+        return hillClimb;
+    }
+
+    public void setHillClimb(int hillClimb) {
+        this.hillClimb = hillClimb;
+    }
+
+    public boolean isMotorcycle() {
+        return motorcycle;
+    }
+
+    public void setMotorcycle(boolean motorcycle) {
+        this.motorcycle = motorcycle;
+    }
+
+    public boolean isAtv() {
+        return atv;
+    }
+
+    public void setAtv(boolean atv) {
+        this.atv = atv;
+    }
+
+    public boolean isJeep() {
+        return jeep;
+    }
+
+    public void setJeep(boolean jeep) {
+        this.jeep = jeep;
+    }
+
+    public boolean isSxs() {
+        return sxs;
+    }
+
+    public void setSxs(boolean sxs) {
+        this.sxs = sxs;
+    }
+
+    public int getLevelBeginner() {
+        return levelBeginner;
+    }
+
+    public void setLevelBeginner(int levelBeginner) {
+        this.levelBeginner = levelBeginner;
+    }
+
+    public int getLevelAdvanced() {
+        return levelAdvanced;
+    }
+
+    public void setLevelAdvanced(int levelAdvanced) {
+        this.levelAdvanced = levelAdvanced;
+    }
+
+    public int getLevelIntermediate() {
+        return levelIntermediate;
+    }
+
+    public void setLevelIntermediate(int levelIntermediate) {
+        this.levelIntermediate = levelIntermediate;
+    }
+
+    public int getLevelExpert() {
+        return levelExpert;
+    }
+
+    public void setLevelExpert(int levelExpert) {
+        this.levelExpert = levelExpert;
     }
 }

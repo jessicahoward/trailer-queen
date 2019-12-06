@@ -41,15 +41,29 @@ public class ResultsController {
                 .asJson();
 
         JSONObject obj = new JSONObject(response.getBody().toString());
-
         String name;
         String desc;
         String parkLat = null;
         String parkLng = null;
         int parkCode;
-        JSONObject hazards;
-        JSONObject type;
-        JSONObject level;
+        int sand = 0;
+        int hardPack = 0;
+        int gravle = 0;
+        int roots = 0;
+        int jumps = 0;
+        int rhythmSection = 0;
+        int largeRocks =0;
+        int mud = 0;
+        int hillClimb = 0;
+        boolean motorcycle;
+        boolean atv;
+        boolean jeep;
+        boolean sxs;
+        int levelBeginner = 0;
+        int levelAdvanced = 0;
+        int levelIntermediate = 0;
+        int levelExpert = 0;
+
         Park aPark = null;
 
         JSONArray detailedInfo = (JSONArray) obj.getJSONArray("data");
@@ -59,11 +73,65 @@ public class ResultsController {
             parkLat = detailedInfo.getJSONObject(i).getString("Lat");
             parkLng = detailedInfo.getJSONObject(i).getString("Lng");
             parkCode = detailedInfo.getJSONObject(i).getInt("Id");
-            hazards = detailedInfo.getJSONObject(i).getJSONObject("terrain");
-            type = detailedInfo.getJSONObject(i).getJSONObject("permittedVehicles");
-            level = detailedInfo.getJSONObject(i).getJSONObject("experienceLevel");
+//            if (String.valueOf(detailedInfo.getJSONObject(i).getJSONObject("terrain").getInt("Sand")) != null) {
+//                sand = detailedInfo.getJSONObject(i).getJSONObject("terrain").getInt("Sand");
+//            }
+//
+//            if (String.valueOf(detailedInfo.getJSONObject(i).getJSONObject("terrain").getInt("HardPack")) != null) {
+//                hardPack = detailedInfo.getJSONObject(i).getJSONObject("terrain").getInt("HardPack");
+//            }
+//
+//            if (String.valueOf(detailedInfo.getJSONObject(i).getJSONObject("terrain").getInt("Gravle")) != null) {
+//                gravle = detailedInfo.getJSONObject(i).getJSONObject("terrain").getInt("Gravle");
+//            }
+//
+//            if (String.valueOf(detailedInfo.getJSONObject(i).getJSONObject("terrain").getInt("Roots")) != null) {
+//                roots = detailedInfo.getJSONObject(i).getJSONObject("terrain").getInt("Roots");
+//            }
+//
+//            if (String.valueOf(detailedInfo.getJSONObject(i).getJSONObject("terrain").getInt("Jumps")) != null) {
+//                jumps = detailedInfo.getJSONObject(i).getJSONObject("terrain").getInt("Jumps");
+//            }
+//
+//            if (String.valueOf(detailedInfo.getJSONObject(i).getJSONObject("terrain").getInt("RhythmSection")) != null) {
+//                rhythmSection = detailedInfo.getJSONObject(i).getJSONObject("terrain").getInt("RhythmSection");
+//            }
+//
+//            largeRocks = detailedInfo.getJSONObject(i).getJSONObject("terrain").getInt("LargeLooseRocks");
+//            if (String.valueOf(detailedInfo.getJSONObject(i).getJSONObject("terrain").getInt("LargeLooseRocks")) != null) {
+//
+//            }
+//
+//            if (String.valueOf(detailedInfo.getJSONObject(i).getJSONObject("terrain").getInt("Mud")) != null) {
+//                mud = detailedInfo.getJSONObject(i).getJSONObject("terrain").getInt("Mud");
+//            }
+//
+//            if (String.valueOf(detailedInfo.getJSONObject(i).getJSONObject("terrain").getInt("HillClimb")) != null) {
+//                hillClimb = detailedInfo.getJSONObject(i).getJSONObject("terrain").getInt("HillClimb");
+//            }
+            motorcycle = detailedInfo.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("Motorcycle");
+            atv = detailedInfo.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("ATV");
+            jeep = detailedInfo.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("Jeep");
+            sxs = detailedInfo.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("SxS");
 
-            aPark = new Park(name, desc, parkLat, parkLng, parkCode, hazards, type, level);
+            if (String.valueOf(detailedInfo.getJSONObject(i).getJSONObject("experienceLevel").getInt("Beginner")) != null) {
+                levelBeginner = detailedInfo.getJSONObject(i).getJSONObject("experienceLevel").getInt("Beginner");
+            }
+
+            if (String.valueOf(detailedInfo.getJSONObject(i).getJSONObject("experienceLevel").getInt("Advanced")) != null) {
+                levelAdvanced = detailedInfo.getJSONObject(i).getJSONObject("experienceLevel").getInt("Advanced");
+            }
+
+            if (String.valueOf(detailedInfo.getJSONObject(i).getJSONObject("experienceLevel").getInt("Intermediate")) != null) {
+                levelIntermediate = detailedInfo.getJSONObject(i).getJSONObject("experienceLevel").getInt("Intermediate");
+            }
+
+            if (String.valueOf(detailedInfo.getJSONObject(i).getJSONObject("experienceLevel").getInt("Expert")) != null) {
+                levelExpert = detailedInfo.getJSONObject(i).getJSONObject("experienceLevel").getInt("Expert");
+            }
+
+
+            aPark = new Park(name, desc, parkLat, parkLng, parkCode, sand, hardPack, gravle, roots, jumps, rhythmSection, largeRocks, mud, hillClimb, motorcycle, atv, jeep, sxs, levelBeginner, levelAdvanced, levelIntermediate, levelExpert);
     }
 
         String weatherURL = "https://dark-sky.p.rapidapi.com/" + parkLat + "," + parkLng + "?lang=en&units=auto&exclude=minutely%252Chourly%252Calerts%252Cflags";
