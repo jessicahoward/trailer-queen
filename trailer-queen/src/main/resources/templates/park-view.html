@@ -27,6 +27,24 @@
 <h1 th:text="${park.name}"></h1>
 <p th:text="${park.description}"></p>
 
+<!--    model.addAttribute("hazards", hazardTypes);-->
+<!--    model.addAttribute("vehicles", vehicleTypes);-->
+
+    <h3>Allowed Vehicles</h3>
+    <ul th:each="vehicle : ${vehicles}">
+        <li th:text="${vehicle}"></li>
+    </ul>
+
+    <h3>Available Hazards</h3>
+    <ul th:each="hazard : ${hazards}">
+        <li th:text="${hazard}"></li>
+    </ul>
+
+<h3>Experience Level</h3>
+<ul th:each="level : ${levels}">
+    <li th:text="${level}"></li>
+</ul>
+
 </div>
 
 </body>

@@ -26,13 +26,7 @@ public class Park {
 
     private int hardPack;
 
-    private int gravle;
-
-    private int roots;
-
     private int jumps;
-
-    private int rhythmSection;
 
     private int largeRocks;
 
@@ -59,7 +53,7 @@ public class Park {
     public Park() {
     }
 
-    public Park(String name, String description, String latitude, String longitude, int code, int sand, int hardPack, int gravle, int roots, int jumps, int rhythmSection, int largeRocks, int mud, int hillClimb, boolean motorcycle, boolean atv, boolean jeep, boolean sxs, int levelBeginner, int levelAdvanced, int levelIntermediate, int levelExpert) {
+    public Park(String name, String description, String latitude, String longitude, int code, int sand, int hardPack, int jumps, int largeRocks, int mud, int hillClimb, boolean motorcycle, boolean atv, boolean jeep, boolean sxs, int levelBeginner, int levelAdvanced, int levelIntermediate, int levelExpert) {
         this.name = name;
         this.description = description;
         this.latitude = latitude;
@@ -67,10 +61,7 @@ public class Park {
         this.code = code;
         this.sand = sand;
         this.hardPack = hardPack;
-        this.gravle = gravle;
-        this.roots = roots;
         this.jumps = jumps;
-        this.rhythmSection = rhythmSection;
         this.largeRocks = largeRocks;
         this.mud = mud;
         this.hillClimb = hillClimb;
@@ -148,36 +139,12 @@ public class Park {
         this.hardPack = hardPack;
     }
 
-    public int getGravle() {
-        return gravle;
-    }
-
-    public void setGravle(int gravle) {
-        this.gravle = gravle;
-    }
-
-    public int getRoots() {
-        return roots;
-    }
-
-    public void setRoots(int roots) {
-        this.roots = roots;
-    }
-
     public int getJumps() {
         return jumps;
     }
 
     public void setJumps(int jumps) {
         this.jumps = jumps;
-    }
-
-    public int getRhythmSection() {
-        return rhythmSection;
-    }
-
-    public void setRhythmSection(int rhythmSection) {
-        this.rhythmSection = rhythmSection;
     }
 
     public int getLargeRocks() {

@@ -80,7 +80,7 @@ public class HomeController {
         int parkCode;
         int sand = 0;
         int hardPack = 0;
-        int gravle = 0;
+        Integer gravle = 0;
         int roots = 0;
         int jumps = 0;
         int rhythmSection = 0;
@@ -107,42 +107,30 @@ public class HomeController {
             parkLat = stuff.getJSONObject(i).getString("Lat");
             parkLng = stuff.getJSONObject(i).getString("Lng");
             parkCode = stuff.getJSONObject(i).getInt("Id");
-//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("Sand")) != null) {
-//                sand = stuff.getJSONObject(i).getJSONObject("terrain").getInt("Sand");
-//            }
-//
-//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("HardPack")) != null) {
-//                hardPack = stuff.getJSONObject(i).getJSONObject("terrain").getInt("HardPack");
-//            }
-//
-//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("Gravle")) != null) {
-//                gravle = stuff.getJSONObject(i).getJSONObject("terrain").getInt("Gravle");
-//            }
-//
-//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("Roots")) != null) {
-//                roots = stuff.getJSONObject(i).getJSONObject("terrain").getInt("Roots");
-//            }
-//
-//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("Jumps")) != null) {
-//                jumps = stuff.getJSONObject(i).getJSONObject("terrain").getInt("Jumps");
-//            }
-//
-//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("RhythmSection")) != null) {
-//                rhythmSection = stuff.getJSONObject(i).getJSONObject("terrain").getInt("RhythmSection");
-//            }
-//
-//            largeRocks = stuff.getJSONObject(i).getJSONObject("terrain").getInt("LargeLooseRocks");
-//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("LargeLooseRocks")) != null) {
-//
-//            }
-//
-//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("Mud")) != null) {
-//                mud = stuff.getJSONObject(i).getJSONObject("terrain").getInt("Mud");
-//            }
-//
-//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("HillClimb")) != null) {
-//                hillClimb = stuff.getJSONObject(i).getJSONObject("terrain").getInt("HillClimb");
-//            }
+            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("Sand")) != null) {
+                sand = stuff.getJSONObject(i).getJSONObject("terrain").getInt("Sand");
+            }
+
+            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("HardPack")) != null) {
+                hardPack = stuff.getJSONObject(i).getJSONObject("terrain").getInt("HardPack");
+            }
+
+            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("Jumps")) != null) {
+                jumps = stuff.getJSONObject(i).getJSONObject("terrain").getInt("Jumps");
+            }
+
+            largeRocks = stuff.getJSONObject(i).getJSONObject("terrain").getInt("LargeLooseRocks");
+            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("LargeLooseRocks")) != null) {
+
+            }
+
+            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("Mud")) != null) {
+                mud = stuff.getJSONObject(i).getJSONObject("terrain").getInt("Mud");
+            }
+
+            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("HillClimb")) != null) {
+                hillClimb = stuff.getJSONObject(i).getJSONObject("terrain").getInt("HillClimb");
+            }
             motorcycle = stuff.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("Motorcycle");
             atv = stuff.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("ATV");
             jeep = stuff.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("Jeep");
@@ -166,7 +154,7 @@ public class HomeController {
 
             Location alocation = new Location(parkLat, parkLng);
             locationList.add(alocation);
-            Park aPark = new Park(name, shortDesc, parkLat, parkLng, parkCode, sand, hardPack, gravle, roots, jumps, rhythmSection, largeRocks, mud, hillClimb, motorcycle, atv, jeep, sxs, levelBeginner, levelAdvanced, levelIntermediate, levelExpert);
+            Park aPark = new Park(name, shortDesc, parkLat, parkLng, parkCode, sand, hardPack, jumps, largeRocks, mud, hillClimb, motorcycle, atv, jeep, sxs, levelBeginner, levelAdvanced, levelIntermediate, levelExpert);
             resultsList.add(aPark);
         }
 
