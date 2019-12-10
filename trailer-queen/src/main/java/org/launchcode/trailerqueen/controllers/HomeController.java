@@ -107,58 +107,71 @@ public class HomeController {
             parkLng = stuff.getJSONObject(i).getString("Lng");
             parkCode = stuff.getJSONObject(i).getInt("Id");
 //
-            System.out.println("$$$$$$$$$$$$$$$ " + stuff.getJSONObject(i).getJSONObject("terrain").get("Sand"));
             if (stuff.getJSONObject(i).getJSONObject("terrain").get("Sand").equals("null") ||  stuff.getJSONObject(i).getJSONObject("terrain").get("Sand").equals(null)) {
                 sand = 0;
             } else {
                 sand = (int)stuff.getJSONObject(i).getJSONObject("terrain").get("Sand");
             }
 
-            System.out.println("%%%%%%%%%%%%%%%% " + sand);
-            System.out.println("________________________");
-//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("Sand")) != null) {
-//                sand = (int)stuff.getJSONObject(i).getJSONObject("terrain").get("Sand");
-//            }
+            if (stuff.getJSONObject(i).getJSONObject("terrain").get("HardPack").equals("null") ||  stuff.getJSONObject(i).getJSONObject("terrain").get("HardPack").equals(null)) {
+                hardPack = 0;
+            } else {
+                hardPack = (int)stuff.getJSONObject(i).getJSONObject("terrain").get("HardPack");
+            }
 
-//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("HardPack")) != null) {
-//                hardPack = stuff.getJSONObject(i).getJSONObject("terrain").getInt("HardPack");
-//            }
+            if (stuff.getJSONObject(i).getJSONObject("terrain").get("Jumps").equals("null") ||  stuff.getJSONObject(i).getJSONObject("terrain").get("Jumps").equals(null)) {
+                jumps = 0;
+            } else {
+                jumps = (int)stuff.getJSONObject(i).getJSONObject("terrain").get("Jumps");
+            }
+
+            if (stuff.getJSONObject(i).getJSONObject("terrain").get("LargeLooseRocks").equals("null") ||  stuff.getJSONObject(i).getJSONObject("terrain").get("LargeLooseRocks").equals(null)) {
+                largeRocks = 0;
+            } else {
+                largeRocks = (int)stuff.getJSONObject(i).getJSONObject("terrain").get("LargeLooseRocks");
+            }
+
+            if (stuff.getJSONObject(i).getJSONObject("terrain").get("Mud").equals("null") ||  stuff.getJSONObject(i).getJSONObject("terrain").get("Mud").equals(null)) {
+                mud = 0;
+            } else {
+                mud = (int)stuff.getJSONObject(i).getJSONObject("terrain").get("Mud");
+            }
+
+            if (stuff.getJSONObject(i).getJSONObject("terrain").get("HillClimb").equals("null") ||  stuff.getJSONObject(i).getJSONObject("terrain").get("HillClimb").equals(null)) {
+                hillClimb = 0;
+            } else {
+                hillClimb = (int)stuff.getJSONObject(i).getJSONObject("terrain").get("HillClimb");
+            }
+
+            motorcycle = stuff.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("Motorcycle");
+            atv = stuff.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("ATV");
+            jeep = stuff.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("Jeep");
+            sxs = stuff.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("SxS");
 //
-//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("Jumps")) != null) {
-//                jumps = stuff.getJSONObject(i).getJSONObject("terrain").getInt("Jumps");
-//            }
-//
-//            largeRocks = stuff.getJSONObject(i).getJSONObject("terrain").getInt("LargeLooseRocks");
-//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("LargeLooseRocks")) != null) {
-//            }
-//
-//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("Mud")) != null) {
-//                mud = stuff.getJSONObject(i).getJSONObject("terrain").getInt("Mud");
-//            }
-//
-//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("HillClimb")) != null) {
-//                hillClimb = stuff.getJSONObject(i).getJSONObject("terrain").getInt("HillClimb");
-//            }
-//            motorcycle = stuff.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("Motorcycle");
-//            atv = stuff.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("ATV");
-//            jeep = stuff.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("Jeep");
-//            sxs = stuff.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("SxS");
-//
-//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Beginner")) != null) {
-//                levelBeginner = stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Beginner");
-//            }
-//
-//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Advanced")) != null) {
-//                levelAdvanced = stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Advanced");
-//            }
-//
-//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Intermediate")) != null) {
-//                levelIntermediate = stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Intermediate");
-//            }
-//
-//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Expert")) != null) {
-//                levelExpert = stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Expert");
-//            }
+
+            if (stuff.getJSONObject(i).getJSONObject("experienceLevel").get("Beginner").equals(null) || stuff.getJSONObject(i).getJSONObject("experienceLevel").get("Beginner").equals("null")) {
+                levelBeginner = 0;
+            } else {
+                levelBeginner = (int)stuff.getJSONObject(i).getJSONObject("experienceLevel").get("Beginner");
+            }
+
+            if (stuff.getJSONObject(i).getJSONObject("experienceLevel").get("Advanced").equals(null) || stuff.getJSONObject(i).getJSONObject("experienceLevel").get("Advanced").equals("null")) {
+                levelAdvanced = 0;
+            } else {
+                levelAdvanced = (int)stuff.getJSONObject(i).getJSONObject("experienceLevel").get("Advanced");
+            }
+
+            if (stuff.getJSONObject(i).getJSONObject("experienceLevel").get("Intermediate").equals(null) || stuff.getJSONObject(i).getJSONObject("experienceLevel").get("Intermediate").equals("null")) {
+                levelIntermediate = 0;
+            } else {
+                levelIntermediate = (int)stuff.getJSONObject(i).getJSONObject("experienceLevel").get("Intermediate");
+            }
+
+            if (stuff.getJSONObject(i).getJSONObject("experienceLevel").get("Expert").equals(null) || stuff.getJSONObject(i).getJSONObject("experienceLevel").get("Expert").equals("null")) {
+                levelExpert = 0;
+            } else {
+                levelExpert = (int)stuff.getJSONObject(i).getJSONObject("experienceLevel").get("Expert");
+            }
 
             Location alocation = new Location(parkLat, parkLng);
             locationList.add(alocation);

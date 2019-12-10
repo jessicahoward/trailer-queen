@@ -6,4 +6,5 @@ public interface ParkService {
 
     public void savePark(Park park);
     public boolean isParkAlreadyPresent(Park park);
+
 }
