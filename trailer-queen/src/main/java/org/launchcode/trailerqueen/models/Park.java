@@ -1,54 +1,77 @@
 package org.launchcode.trailerqueen.models;
 
-import org.json.JSONObject;
+import javax.persistence.*;
+import java.util.Set;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
+@Entity
+@Table(name = "trail_info")
 public class Park {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "park_id")
     private int id;
 
+    @Column(name = "park_name")
     private String name;
 
+    @Column(name = "park_desc")
     private String description;
 
+    @Column(name = "park_lat")
     private String latitude;
 
+    @Column(name = "park_lng")
     private String longitude;
 
+    @Column(name = "park_code")
     private int code;
 
+    @Column(name = "hazard_sand")
     private int sand;
 
+    @Column(name = "hazard_hardpack")
     private int hardPack;
 
+    @Column(name = "hazard_jumps")
     private int jumps;
 
+    @Column(name = "hazard_largerocks")
     private int largeRocks;
 
+    @Column(name = "hazard_mud")
     private  int mud;
 
+    @Column(name = "hazard_hillclimb")
     private int hillClimb;
 
+    @Column(name = "allow_cycle")
     private boolean motorcycle;
 
+    @Column(name = "allow_atv")
     private boolean atv;
 
+    @Column(name = "allow_jeep")
     private boolean jeep;
 
+    @Column(name = "allow_sxs")
     private boolean sxs;
 
+    @Column(name = "level_beginner")
     private int levelBeginner;
 
+    @Column(name = "level_advanced")
     private int levelAdvanced;
 
+    @Column(name = "level_intermediate")
     private int levelIntermediate;
 
+    @Column(name = "level_expert")
     private int levelExpert;
+
+    @ManyToMany(cascade =  CascadeType.ALL)
+    @JoinTable(name = "user_fav_park", joinColumns = @JoinColumn(name = "park_id"), inverseJoinColumns = @JoinColumn(name = "auth_user_id"))
+    private Set<User> users;
 
     public Park() {
     }
@@ -233,5 +256,13 @@ public class Park {
 
     public void setLevelExpert(int levelExpert) {
         this.levelExpert = levelExpert;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

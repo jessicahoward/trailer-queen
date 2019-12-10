@@ -25,10 +25,11 @@
 
 <div class="container" id="park-details">
 <h1 th:text="${park.name}"></h1>
-<p th:text="${park.description}"></p>
-
-<!--    model.addAttribute("hazards", hazardTypes);-->
-<!--    model.addAttribute("vehicles", vehicleTypes);-->
+    <form method="POST", action="/home">
+        <input type="hidden" name="save" th:value="${park}">
+        <input type="submit"  th:value="Save">
+    </form>
+    <p th:text="${park.description}"></p>
 
     <h3>Allowed Vehicles</h3>
     <ul th:each="vehicle : ${vehicles}">

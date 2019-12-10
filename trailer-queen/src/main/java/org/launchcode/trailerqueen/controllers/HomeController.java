@@ -5,7 +5,6 @@ import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.GeocodingResult;
-
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.constraints.Null;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -81,16 +81,14 @@ public class HomeController {
         int sand = 0;
         int hardPack = 0;
         Integer gravle = 0;
-        int roots = 0;
         int jumps = 0;
-        int rhythmSection = 0;
         int largeRocks = 0;
         int mud = 0;
         int hillClimb = 0;
-        boolean motorcycle;
-        boolean atv;
-        boolean jeep;
-        boolean sxs;
+        boolean motorcycle = false;
+        boolean atv = false;
+        boolean jeep = false;
+        boolean sxs = false;
         int levelBeginner = 0;
         int levelAdvanced = 0;
         int levelIntermediate = 0;
@@ -100,6 +98,7 @@ public class HomeController {
         ArrayList<Location> locationList = new ArrayList<>();
         ArrayList<Park> resultsList = new ArrayList<>();
         JSONArray stuff = (JSONArray) obj.getJSONArray("data");
+//        System.out.println(stuff);
         for (int i = 0; i < stuff.length(); i++) {
             name = stuff.getJSONObject(i).getString("Name");
             desc = stuff.getJSONObject(i).getString("Desc");
@@ -107,50 +106,59 @@ public class HomeController {
             parkLat = stuff.getJSONObject(i).getString("Lat");
             parkLng = stuff.getJSONObject(i).getString("Lng");
             parkCode = stuff.getJSONObject(i).getInt("Id");
-            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("Sand")) != null) {
-                sand = stuff.getJSONObject(i).getJSONObject("terrain").getInt("Sand");
+//
+            System.out.println("$$$$$$$$$$$$$$$ " + stuff.getJSONObject(i).getJSONObject("terrain").get("Sand"));
+            if (stuff.getJSONObject(i).getJSONObject("terrain").get("Sand").equals("null") ||  stuff.getJSONObject(i).getJSONObject("terrain").get("Sand").equals(null)) {
+                sand = 0;
+            } else {
+                sand = (int)stuff.getJSONObject(i).getJSONObject("terrain").get("Sand");
             }
 
-            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("HardPack")) != null) {
-                hardPack = stuff.getJSONObject(i).getJSONObject("terrain").getInt("HardPack");
-            }
+            System.out.println("%%%%%%%%%%%%%%%% " + sand);
+            System.out.println("________________________");
+//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("Sand")) != null) {
+//                sand = (int)stuff.getJSONObject(i).getJSONObject("terrain").get("Sand");
+//            }
 
-            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("Jumps")) != null) {
-                jumps = stuff.getJSONObject(i).getJSONObject("terrain").getInt("Jumps");
-            }
-
-            largeRocks = stuff.getJSONObject(i).getJSONObject("terrain").getInt("LargeLooseRocks");
-            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("LargeLooseRocks")) != null) {
-
-            }
-
-            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("Mud")) != null) {
-                mud = stuff.getJSONObject(i).getJSONObject("terrain").getInt("Mud");
-            }
-
-            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("HillClimb")) != null) {
-                hillClimb = stuff.getJSONObject(i).getJSONObject("terrain").getInt("HillClimb");
-            }
-            motorcycle = stuff.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("Motorcycle");
-            atv = stuff.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("ATV");
-            jeep = stuff.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("Jeep");
-            sxs = stuff.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("SxS");
-
-            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Beginner")) != null) {
-                levelBeginner = stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Beginner");
-            }
-
-            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Advanced")) != null) {
-                levelAdvanced = stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Advanced");
-            }
-
-            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Intermediate")) != null) {
-                levelIntermediate = stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Intermediate");
-            }
-
-            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Expert")) != null) {
-                levelExpert = stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Expert");
-            }
+//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("HardPack")) != null) {
+//                hardPack = stuff.getJSONObject(i).getJSONObject("terrain").getInt("HardPack");
+//            }
+//
+//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("Jumps")) != null) {
+//                jumps = stuff.getJSONObject(i).getJSONObject("terrain").getInt("Jumps");
+//            }
+//
+//            largeRocks = stuff.getJSONObject(i).getJSONObject("terrain").getInt("LargeLooseRocks");
+//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("LargeLooseRocks")) != null) {
+//            }
+//
+//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("Mud")) != null) {
+//                mud = stuff.getJSONObject(i).getJSONObject("terrain").getInt("Mud");
+//            }
+//
+//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("terrain").getInt("HillClimb")) != null) {
+//                hillClimb = stuff.getJSONObject(i).getJSONObject("terrain").getInt("HillClimb");
+//            }
+//            motorcycle = stuff.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("Motorcycle");
+//            atv = stuff.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("ATV");
+//            jeep = stuff.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("Jeep");
+//            sxs = stuff.getJSONObject(i).getJSONObject("permittedVehicles").getBoolean("SxS");
+//
+//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Beginner")) != null) {
+//                levelBeginner = stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Beginner");
+//            }
+//
+//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Advanced")) != null) {
+//                levelAdvanced = stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Advanced");
+//            }
+//
+//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Intermediate")) != null) {
+//                levelIntermediate = stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Intermediate");
+//            }
+//
+//            if (String.valueOf(stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Expert")) != null) {
+//                levelExpert = stuff.getJSONObject(i).getJSONObject("experienceLevel").getInt("Expert");
+//            }
 
             Location alocation = new Location(parkLat, parkLng);
             locationList.add(alocation);
@@ -158,7 +166,6 @@ public class HomeController {
             resultsList.add(aPark);
         }
 
-        System.out.println(gravle);
         model.addAttribute("baseLat", googLat);
         model.addAttribute("baseLng", googLng);
         model.addAttribute("locations", locationList);

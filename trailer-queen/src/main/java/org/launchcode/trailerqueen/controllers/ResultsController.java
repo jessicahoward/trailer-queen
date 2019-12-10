@@ -9,6 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.launchcode.trailerqueen.models.Park;
 import org.launchcode.trailerqueen.models.Weather;
+import org.launchcode.trailerqueen.service.ParkService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,9 @@ import java.util.ArrayList;
 
 @Controller
 public class ResultsController {
+
+    @Autowired
+    ParkService parkService;
 
     @RequestMapping(value = "results", method = RequestMethod.GET)
     public String displayResults() {
@@ -49,7 +54,7 @@ public class ResultsController {
         int sand = 0;
         int hardPack = 0;
         int jumps = 0;
-        int largeRocks =0;
+        int largeRocks = 0;
         int mud = 0;
         int hillClimb = 0;
         boolean motorcycle;
@@ -143,7 +148,9 @@ public class ResultsController {
             }
 
             aPark = new Park(name, desc, parkLat, parkLng, parkCode, sand, hardPack, jumps, largeRocks, mud, hillClimb, motorcycle, atv, jeep, sxs, levelBeginner, levelAdvanced, levelIntermediate, levelExpert);
+
     }
+        parkService.savePark(aPark);
 
         String weatherURL = "https://dark-sky.p.rapidapi.com/" + parkLat + "," + parkLng + "?lang=en&units=auto&exclude=minutely%252Chourly%252Calerts%252Cflags";
         HttpResponse<JsonNode> weatherResponse = Unirest.get(weatherURL)
@@ -182,9 +189,11 @@ public class ResultsController {
         model.addAttribute("levels", trailExp);
         model.addAttribute("park", aPark);
         model.addAttribute("forecast", weatherList);
-        System.out.println(hazardTypes);
         return "park-view";
     }
+
+
+
 }
 
 
