@@ -14,6 +14,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.launchcode.trailerqueen.models.Location;
 import org.launchcode.trailerqueen.models.Park;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +33,13 @@ public class HomeController {
     @RequestMapping(value = "home", method = RequestMethod.GET)
     public String displayHome(Model model) {
 
+        String currentUserName = "";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            currentUserName = authentication.getName();
+        }
+
+        model.addAttribute("username", currentUserName);
 //        TODO: Pass favorites to home view
         return "home";
     }
