@@ -2,8 +2,8 @@ package org.launchcode.trailerqueen.service;
 
 import org.launchcode.trailerqueen.models.Role;
 import org.launchcode.trailerqueen.models.User;
-import org.launchcode.trailerqueen.repository.RoleRepository;
-import org.launchcode.trailerqueen.repository.UserRepository;
+import org.launchcode.trailerqueen.repositories.RoleRepository;
+import org.launchcode.trailerqueen.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

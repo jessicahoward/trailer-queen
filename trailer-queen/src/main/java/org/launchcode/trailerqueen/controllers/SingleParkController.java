@@ -2,8 +2,8 @@ package org.launchcode.trailerqueen.controllers;
 
 import org.launchcode.trailerqueen.models.Park;
 import org.launchcode.trailerqueen.models.User;
-import org.launchcode.trailerqueen.repository.ParkRepository;
-import org.launchcode.trailerqueen.repository.UserRepository;
+import org.launchcode.trailerqueen.repositories.ParkRepository;
+import org.launchcode.trailerqueen.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -33,10 +33,11 @@ public class SingleParkController {
         }
 
         User thisUser = userRepository.findByEmail(currentUserName);
-        System.out.println(">>>>>>>>>>>>>>>>>> " + thisUser.getId());
-
         Park thisPark = parkRepository.findByCode(code);
-        System.out.println("<<<<<<<<<<<<<<<<<< " + thisPark.getId());
+
+//        Favorite newFav = new Favorite(thisUser.getId(), thisPark.getId());
+        System.out.println("USER: " + thisUser.getId() + " PARK: " + thisPark.getId());
+//        favoriteDao.save(newFav);
 
 
 

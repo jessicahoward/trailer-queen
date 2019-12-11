@@ -1,4 +1,4 @@
-package org.launchcode.trailerqueen.repository;
+package org.launchcode.trailerqueen.repositories;
 
 import org.launchcode.trailerqueen.models.Park;
 import org.springframework.data.repository.CrudRepository;

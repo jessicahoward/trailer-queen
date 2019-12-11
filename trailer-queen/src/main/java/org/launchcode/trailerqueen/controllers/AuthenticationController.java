@@ -49,7 +49,6 @@ public class AuthenticationController {
         // we will save the user if, no binding errors
         else {
             userService.saveUser(user);
-//            System.out.println("******************: " + user.getId());
             modelAndView.setViewName("login");
             return modelAndView;
         }
