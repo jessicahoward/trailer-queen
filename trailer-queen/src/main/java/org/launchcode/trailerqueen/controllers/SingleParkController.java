@@ -4,6 +4,7 @@ import org.launchcode.trailerqueen.models.Park;
 import org.launchcode.trailerqueen.models.User;
 import org.launchcode.trailerqueen.repositories.ParkRepository;
 import org.launchcode.trailerqueen.repositories.UserRepository;
+import org.launchcode.trailerqueen.service.ParkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,6 +24,9 @@ public class SingleParkController {
     @Autowired
     private ParkRepository parkRepository;
 
+    @Autowired
+    ParkService parkService;
+
     @RequestMapping(value = "park-view", method = RequestMethod.POST)
     public String favIndividualPark(Model model, @RequestParam int code) {
 
@@ -32,12 +36,12 @@ public class SingleParkController {
             currentUserName = authentication.getName();
         }
 
-        User thisUser = userRepository.findByEmail(currentUserName);
         Park thisPark = parkRepository.findByCode(code);
+        parkService.favePark(thisPark);
 
-//        Favorite newFav = new Favorite(thisUser.getId(), thisPark.getId());
-        System.out.println("USER: " + thisUser.getId() + " PARK: " + thisPark.getId());
-//        favoriteDao.save(newFav);
+////        Favorite newFav = new Favorite(thisUser.getId(), thisPark.getId());
+//        System.out.println("USER: " + thisUser.getId() + " PARK: " + thisPark.getId());
+////        favoriteDao.save(newFav);
 
 
 

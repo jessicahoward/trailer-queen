@@ -1,7 +1,9 @@
 package org.launchcode.trailerqueen.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "trail_info")
@@ -69,12 +71,9 @@ public class Park {
     @Column(name = "level_expert")
     private int levelExpert;
 
-//    @ManyToMany(cascade =  CascadeType.ALL)
-//    @JoinTable(name = "user_fav_park", joinColumns = @JoinColumn(name = "park_id"), inverseJoinColumns = @JoinColumn(name = "auth_user_id"))
-//    private Set<User> users;
-//
-//    @ManyToMany
-//    private List<User> users;
+    @ManyToMany(cascade =  CascadeType.ALL)
+    @JoinTable(name = "user_fav_park", joinColumns = @JoinColumn(name = "park_id"), inverseJoinColumns = @JoinColumn(name = "auth_user_id"))
+    private Set<User> users;
 
     public Park() {
     }
@@ -100,10 +99,6 @@ public class Park {
         this.levelIntermediate = levelIntermediate;
         this.levelExpert = levelExpert;
     }
-
-//    public void addUser(User aUser) {
-//        users.add(aUser);
-//    }
 
     public int getId() {
         return id;
@@ -265,4 +260,11 @@ public class Park {
         this.levelExpert = levelExpert;
     }
 
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
 }
