@@ -25,8 +25,8 @@
 
 <div class="container" id="park-details">
 <h1 th:text="${park.name}"></h1>
-    <form method="POST", action="/home">
-        <input type="hidden" name="save" th:value="${park}">
+    <form method="POST">
+        <input type="hidden" name="code" th:value="${park.code}">
         <input type="submit"  th:value="Save">
     </form>
     <p th:text="${park.description}"></p>
