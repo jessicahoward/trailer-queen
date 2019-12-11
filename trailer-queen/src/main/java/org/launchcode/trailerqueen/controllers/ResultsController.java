@@ -31,7 +31,7 @@ public class ResultsController {
         return "results";
     }
 
-    @RequestMapping(value = "park-view", method = RequestMethod.POST)
+    @RequestMapping(value = "park-view", method = RequestMethod.GET)
     public String targetSpecificResult(Model model, @RequestParam int code) throws JSONException, UnirestException {
 
         String host = "https://brappdbv2.p.rapidapi.com/Park/" + code;
@@ -221,6 +221,7 @@ public class ResultsController {
         model.addAttribute("forecast", weatherList);
         return "park-view";
     }
+
 
 
 
