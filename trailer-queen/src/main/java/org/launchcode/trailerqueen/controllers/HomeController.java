@@ -14,6 +14,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.launchcode.trailerqueen.models.Location;
 import org.launchcode.trailerqueen.models.Park;
+import org.launchcode.trailerqueen.models.User;
+import org.launchcode.trailerqueen.repositories.ParkRepository;
+import org.launchcode.trailerqueen.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,11 +27,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.persistence.Query;
 import java.io.IOException;
 import java.util.ArrayList;
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    ParkRepository parkRepository;
 
     @RequestMapping(value = "home", method = RequestMethod.GET)
     public String displayHome(Model model) {
@@ -38,7 +49,9 @@ public class HomeController {
             currentUserName = authentication.getName();
         }
 
-        model.addAttribute("username", currentUserName);
+        User user = userRepository.findByEmail(currentUserName);
+
+        model.addAttribute("username", user.getEmail());
 //        TODO: Pass favorites to home view
         return "home";
     }

@@ -1,7 +1,6 @@
 package org.launchcode.trailerqueen.controllers;
 
 import org.launchcode.trailerqueen.models.Park;
-import org.launchcode.trailerqueen.models.User;
 import org.launchcode.trailerqueen.repositories.ParkRepository;
 import org.launchcode.trailerqueen.repositories.UserRepository;
 import org.launchcode.trailerqueen.service.ParkService;
@@ -38,12 +37,6 @@ public class SingleParkController {
 
         Park thisPark = parkRepository.findByCode(code);
         parkService.favePark(thisPark);
-
-////        Favorite newFav = new Favorite(thisUser.getId(), thisPark.getId());
-//        System.out.println("USER: " + thisUser.getId() + " PARK: " + thisPark.getId());
-////        favoriteDao.save(newFav);
-
-
 
         return "redirect:/home";
     }
