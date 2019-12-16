@@ -1,0 +1,8 @@
+#map {
+    float: right;
+}
+
+aside {
+    height: 50%;
+    overflow: scroll;
+}

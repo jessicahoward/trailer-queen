@@ -33,6 +33,10 @@ public class User {
     @JoinTable(name = "auth_user_role", joinColumns = @JoinColumn(name = "auth_user_id"), inverseJoinColumns = @JoinColumn(name = "auth_role_id"))
     private Set<Role> roles;
 
+//    @ManyToMany(cascade =  CascadeType.ALL)
+//    @JoinTable(name = "user_fav_park", joinColumns = @JoinColumn(name = "auth_user_id"), inverseJoinColumns = @JoinColumn(name = "park_id"))
+//    private Set<Park> parks;
+
     public int getId() {
         return id;
     }
@@ -72,4 +76,12 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+//    public Set<Park> getParks() {
+//        return parks;
+//    }
+//
+//    public void setParks(Set<Park> parks) {
+//        this.parks = parks;
+//    }
 }

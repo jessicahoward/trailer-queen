@@ -17,6 +17,7 @@ import org.launchcode.trailerqueen.models.Park;
 import org.launchcode.trailerqueen.models.User;
 import org.launchcode.trailerqueen.repositories.ParkRepository;
 import org.launchcode.trailerqueen.repositories.UserRepository;
+import org.launchcode.trailerqueen.service.ParkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -30,12 +31,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.persistence.Query;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class HomeController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ParkService parkService;
 
     @Autowired
     ParkRepository parkRepository;
@@ -51,6 +56,7 @@ public class HomeController {
 
         User user = userRepository.findByEmail(currentUserName);
 
+//        SELECT `park_id` FROM `user_fav_park` WHERE `auth_user_id`LIKE 5;
         model.addAttribute("username", user.getEmail());
 //        TODO: Pass favorites to home view
         return "home";
@@ -102,7 +108,6 @@ public class HomeController {
         int parkCode;
         int sand = 0;
         int hardPack = 0;
-        Integer gravle = 0;
         int jumps = 0;
         int largeRocks = 0;
         int mud = 0;
@@ -120,7 +125,6 @@ public class HomeController {
         ArrayList<Location> locationList = new ArrayList<>();
         ArrayList<Park> resultsList = new ArrayList<>();
         JSONArray stuff = (JSONArray) obj.getJSONArray("data");
-//        System.out.println(stuff);
         for (int i = 0; i < stuff.length(); i++) {
             name = stuff.getJSONObject(i).getString("Name");
             desc = stuff.getJSONObject(i).getString("Desc");
@@ -128,7 +132,7 @@ public class HomeController {
             parkLat = stuff.getJSONObject(i).getString("Lat");
             parkLng = stuff.getJSONObject(i).getString("Lng");
             parkCode = stuff.getJSONObject(i).getInt("Id");
-//
+
             if (stuff.getJSONObject(i).getJSONObject("terrain").get("Sand").equals("null") ||  stuff.getJSONObject(i).getJSONObject("terrain").get("Sand").equals(null)) {
                 sand = 0;
             } else {

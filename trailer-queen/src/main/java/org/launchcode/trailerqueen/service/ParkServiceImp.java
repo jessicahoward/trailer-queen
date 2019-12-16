@@ -50,4 +50,5 @@ public class ParkServiceImp implements ParkService {
         park.setUsers(new HashSet<User>(Arrays.asList(user)));
         parkRepository.save(park);
     }
+
 }
