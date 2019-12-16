@@ -52,5 +52,9 @@
 </div>
 
 </div>
+
+<ul th:each="park : ${favParks}">
+    <li th:text="${park.name}"></li>
+</ul>
 </body>
 </html>
