@@ -6,18 +6,6 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-
-<!--****************************************************************************************-->
-
-
-<!--*****************************************-->
-
-<!--<div class="container map-container col-md">-->
-<!--    <div id="map"></div>-->
-<!--</div>-->
-
-<!--*****************************************-->
-
 <div class="container row">
 <aside class="park-results-aside col-md">
     <div class="card park-results" th:each="park : ${parks}">
@@ -26,26 +14,16 @@
             <p class="card-text" th:text="${park.description}"></p>
             <form action="/park-view">
                 <input type="hidden" name="code" th:value="${park.code}">
-<!--                <input type="submit"  th:value="View">-->
                 <button type="submit" class="btn btn-primary btn-block">View</button>
-
             </form>
         </div>
     </div>
 </aside>
-
     <div class="container map-container col-md">
         <div id="map"></div>
     </div>
-
 </div>
-<!--&lt;!&ndash;*****************************************&ndash;&gt;-->
 
-<!--<div class="row map-container">-->
-<!--    <div id="map"></div>-->
-<!--</div>-->
-
-<!--&lt;!&ndash;*****************************************&ndash;&gt;-->
 <script th:inline="javascript">
 
       var baseLat = [[${baseLat}]];
@@ -74,9 +52,10 @@
         });
        }
       }
-    </script>
+</script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6urX1HiPnH_DH0Miwbaz3Ce2htxSS-68&callback=initMap"
-        async defer></script>
+        async defer>
+</script>
 
 </body>
 </html>

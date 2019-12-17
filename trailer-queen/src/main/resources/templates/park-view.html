@@ -6,42 +6,70 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<aside>
-<div class="container" th:each="day: ${forecast}">
-    <div class="card">
-        <div class="card-body">
-            <img th:src="'images/' + ${day.displayImage} + '.png'" th:alt="${day.displayImage}">
-            <p class="card-text" th:text="'Chance of Precipitation: ' + ${day.precipPercentage} + '%'"></p>
-            <p class="card-text" th:text="'High: ' + ${day.highTemp}"></p>
-            <p class="card-text" th:text="'Low: ' + ${day.lowTemp}"></p>
-        </div>
-    </div>
-    <hr>
+<div class="park-heading">
+<h1 class="park-title" th:text="${park.name}"></h1>
+<form class="save-park" method="POST">
+    <input type="hidden" name="code" th:value="${park.code}">
+    <input type="submit"  th:value="Save">
+</form>
 </div>
-</aside>
+<div class="row weather-container">
+<table>
+<tr>
+    <td th:each="day: ${forecast}">
+        <div class="card">
+            <div class="card-body">
+                <img th:src="'images/' + ${day.displayImage} + '.png'" th:alt="${day.displayImage}">
+                <p class="card-text" th:text="'Precipitation Chance: ' + ${day.precipPercentage} + '%'"></p>
+                <p class="card-text" th:text="'High: ' + ${day.highTemp}"></p>
+                <p class="card-text" th:text="'Low: ' + ${day.lowTemp}"></p>
+            </div>
+        </div>
+    </td>
+</tr>
+</table>
+</div>
+<!--**********************************************************************************************-->
 
 <div class="container" id="park-details">
-<h1 th:text="${park.name}"></h1>
-    <form method="POST">
-        <input type="hidden" name="code" th:value="${park.code}">
-        <input type="submit"  th:value="Save">
-    </form>
+    <div class="row">
+    <h3>Description</h3>
     <p th:text="${park.description}"></p>
-
+</div>
+<!--**********************************************************************************************-->
+    <div class="row">
+<div class="col">
     <h3>Allowed Vehicles</h3>
-    <ul th:each="vehicle : ${vehicles}">
-        <li th:text="${vehicle}"></li>
-    </ul>
+    <h4 th:unless="${vehicles} and ${vehicles.size()}">None Listed</h4>
+    <div class="card">
+        <ul class="list-group list-group-flush" th:each="vehicle : ${vehicles}">
+            <li class="list-group-item" th:text="${vehicle}"></li>
+        </ul>
+    </div>
+</div>
 
+    <div class="col">
     <h3>Available Hazards</h3>
-    <ul th:each="hazard : ${hazards}">
-        <li th:text="${hazard}"></li>
-    </ul>
+    <h4 th:unless="${hazards} and ${hazards.size()}">None Listed</h4>
+        <div class="card">
+            <ul class="list-group list-group-flush" th:each="hazard : ${hazards}">
+                <li class="list-group-item" th:text="${hazard}"></li>
+            </ul>
+        </div>
+</div>
 
+    <div class="col">
 <h3>Experience Level</h3>
-<ul th:each="level : ${levels}">
-    <li th:text="${level}"></li>
-</ul>
+    <h4 th:unless="${levels} and ${levels.size()}">None Listed</h4>
+        <div class="card">
+            <ul class="list-group list-group-flush" th:each="level : ${levels}">
+                <li class="list-group-item" th:text="${level}"></li>
+            </ul>
+        </div>
+    </div>
+    </div>
+<!--**********************************************************************************************-->
+
 
 </div>
 

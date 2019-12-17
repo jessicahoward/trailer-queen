@@ -191,6 +191,7 @@ public class ResultsController {
         Weather someWeather = null;
 
         ArrayList<Weather> weatherList = new ArrayList<>();
+
         for (int i = 0; i < weatherDetails.length(); i++) {
             highTempDouble = weatherDetails.getJSONObject(i).getDouble("temperatureMax");
             highTemp = (int)highTempDouble;

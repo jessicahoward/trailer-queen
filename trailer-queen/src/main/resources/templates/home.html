@@ -58,6 +58,7 @@
 </div>
 
 <div class="container row fav-main">
+    <h4 th:unless="${favParks} and ${favParks.size()}"></h4>
     <div class="card fav-card" th:each="park: ${favParks}">
         <div class="card-body">
             <a th:href="'park-view?code=' + ${park.code}"><p th:text="${park.name}"></p></a>
