@@ -3,23 +3,25 @@
 
 <head th:replace="fragments :: head"></head>
 
-<body style="background-color:#ededed;">
-
-
+<body class="landing">
 
 <nav th:replace="fragments :: navigation"></nav>
-<div class="container-fluid">
-    <div class="row col-lg-4 col-lg-offset-4" style="margin-top: 80px;background-color:#fff;padding:20px;border:solid 1px #ddd;">
-        <form th:action="@{/login}" method="POST" class="form-signin">
-            <h3 class="form-signin-heading" th:text="Login"></h3>
-            <br /> <input type="text" id="email" name="email" th:placeholder="Email" class="form-control" /> <br /> <input type="password" th:placeholder="Password" id="password" name="password" class="form-control" /> <br />
+
+<div class="container">
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <form th:action="@{/login}" method="POST">
+            <h3 th:text="Login"></h3>
+            <input type="text" id="email" name="email" th:placeholder="Email" class="form-control" /> <br /> <input type="password" th:placeholder="Password" id="password" name="password" class="form-control" /> <br />
 
             <div align="center" th:if="${param.error}">
-                <p style="font-size: 20; color: #FF1C19;">Email or Password is invalid.</p>
+                <p>Email or Password is invalid.</p>
             </div>
-            <button class="btn btn-lg btn-primary" name="Submit" value="Login" type="Submit" th:text="Login" style="margin-right:10px;"></button>
-            <a href="/register">Create Account</a>        </form>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
     </div>
 </div>
+</div>
+
 </body>
 </html>

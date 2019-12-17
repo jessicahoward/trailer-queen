@@ -6,55 +6,65 @@
 <body>
 <nav th:replace="fragments :: navigation"></nav>
 
-<h1 th:text="'Hello ' + ${username}"></h1>
-<a href="/logout">Log Out</a>
-
-<div class="container-fluid">
-    <div class="row col-lg-4 col-lg-offset-4" style="margin-top: 80px;background-color:#fff;padding:20px;border:solid 1px #ddd;">
-        <form method="POST" action="/results" class="form-signin">
-            <h3 class="form-signin-heading" th:text="Search"></h3>
-            <br /> <input type="text" id="zip" name="zip" th:placeholder="Zipcode" class="form-control" />
-            <br />
-            <select name="vehicle">
-                <option th:text="Motorcycles" th:value="Motorcycles"></option>
-                <option th:text="Jeep" th:value="Jeep"></option>
-                <option th:text="SxS" th:value="SxS"></option>
-                <option th:text="ATV" th:value="ATV"></option>
-            </select>
-            <br />
-            <select name="experience">
-                <option th:text="Beginner" th:value="beginner"></option>
-                <option th:text="Intermediate" th:value="intermediate"></option>
-                <option th:text="Advanced" th:value="advanced"></option>
-                <option th:text="Expert" th:value="expert"></option>
-            </select>
-            <br />
-            <select name="terrain">
-                <option th:text="Mud" th:value="Mud"></option>
-                <option th:text="Sand" th:value="Sand"></option>
-                <option th:text="Jumps" th:value="Sand"></option>
-                <option th:value="HillClimbs">Hill Climbs</option>
-                <option th:value="HardPack">Hard Pack</option>
-                <option th:value="LargeLooseRocks">Loose Rocks</option>
-            </select>
-            <br />
-            <select name="dist">
-                <option th:text="25" th:value="25"></option>
-                <option th:text="50" th:value="50"></option>
-                <option th:text="75" th:value="75"></option>
-                <option th:text="100" th:value="100"></option>
-                <option th:text="150" th:value="150"></option>
-                <option th:text="200" th:value="200"></option>
-            </select>
-            <button class="btn btn-lg btn-primary" name="Submit" value="Search" type="Submit" th:text="Search" style="margin-right:10px;"></button>
-        </form>
+<!--*********************************************************************************-->
+<div class="container">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <form method="POST" action="/results" class="form-signin">
+                <h3 th:text="Search"></h3>
+                <input type="text" id="zip" name="zip" th:placeholder="Zipcode" class="form-control" required/>
+                <br />
+                <select class="form-control" name="vehicle">
+                    <option th:text="Motorcycles" th:value="Motorcycles"></option>
+                    <option th:text="Jeep" th:value="Jeep"></option>
+                    <option th:text="SxS" th:value="SxS"></option>
+                    <option th:text="ATV" th:value="ATV"></option>
+                </select>
+                <br />
+                <select class="form-control" name="experience">
+                    <option th:text="Beginner" th:value="beginner"></option>
+                    <option th:text="Intermediate" th:value="intermediate"></option>
+                    <option th:text="Advanced" th:value="advanced"></option>
+                    <option th:text="Expert" th:value="expert"></option>
+                </select>
+                <br />
+                <select class="form-control" name="terrain">
+                    <option th:text="Mud" th:value="Mud"></option>
+                    <option th:text="Sand" th:value="Sand"></option>
+                    <option th:text="Jumps" th:value="Sand"></option>
+                    <option th:value="HillClimbs">Hill Climbs</option>
+                    <option th:value="HardPack">Hard Pack</option>
+                    <option th:value="LargeLooseRocks">Loose Rocks</option>
+                </select>
+                <br />
+                <select class="form-control" name="dist">
+                    <option th:text="25" th:value="25"></option>
+                    <option th:text="50" th:value="50"></option>
+                    <option th:text="75" th:value="75"></option>
+                    <option th:text="100" th:value="100"></option>
+                    <option th:text="150" th:value="150"></option>
+                    <option th:text="200" th:value="200"></option>
+                </select>
+                <br />
+                <button class="btn btn-primary btn-block" name="Submit" value="Search" type="Submit" th:text="Search"></button>
+            </form>
+        </div>
     </div>
 </div>
 
+<div class="fav-header">
+<h3 th:text="Favorites"></h3>
+<hr>
 </div>
 
-<ul th:each="park : ${favParks}">
-    <li th:text="${park.name}"></li>
-</ul>
+<div class="container row fav-main">
+    <div class="card fav-card" th:each="park: ${favParks}">
+        <div class="card-body">
+            <a th:href="'park-view?code=' + ${park.code}"><p th:text="${park.name}"></p></a>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>

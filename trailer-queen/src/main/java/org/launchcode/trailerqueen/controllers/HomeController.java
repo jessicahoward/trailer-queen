@@ -57,10 +57,8 @@ public class HomeController {
         User user = userRepository.findByEmail(currentUserName);
         List<Park> favParks = parkRepository.findByUsers_Id(user.getId());
 
-//        SELECT `park_id` FROM `user_fav_park` WHERE `auth_user_id`LIKE 5;
         model.addAttribute("favParks", favParks);
         model.addAttribute("username", user.getEmail());
-//        TODO: Pass favorites to home view
         return "home";
     }
 
