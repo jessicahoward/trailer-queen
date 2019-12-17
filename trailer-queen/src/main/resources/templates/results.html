@@ -6,27 +6,46 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<div class="container map-container">
-    <div id="map"></div>
-</div>
 
 <!--****************************************************************************************-->
 
-<div class="container">
-<aside class="row">
-    <div th:each="park : ${parks}" class="card park-results">
+
+<!--*****************************************-->
+
+<!--<div class="container map-container col-md">-->
+<!--    <div id="map"></div>-->
+<!--</div>-->
+
+<!--*****************************************-->
+
+<div class="container row">
+<aside class="park-results-aside col-md">
+    <div class="card park-results" th:each="park : ${parks}">
         <div class="card-body">
             <h5 class="card-title" th:text="${park.name}"></h5>
             <p class="card-text" th:text="${park.description}"></p>
             <form action="/park-view">
                 <input type="hidden" name="code" th:value="${park.code}">
-                <input type="submit"  th:value="More">
+<!--                <input type="submit"  th:value="View">-->
+                <button type="submit" class="btn btn-primary btn-block">View</button>
+
             </form>
         </div>
     </div>
 </aside>
-</div>
 
+    <div class="container map-container col-md">
+        <div id="map"></div>
+    </div>
+
+</div>
+<!--&lt;!&ndash;*****************************************&ndash;&gt;-->
+
+<!--<div class="row map-container">-->
+<!--    <div id="map"></div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash;*****************************************&ndash;&gt;-->
 <script th:inline="javascript">
 
       var baseLat = [[${baseLat}]];
