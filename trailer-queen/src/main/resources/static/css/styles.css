@@ -8,11 +8,11 @@ html {
 }
 
 .btn {
-        border: none;
+    border: none;
 }
 
 .btn:hover {
-        border: none;
+    border: none;
 }
 
 a {
@@ -26,10 +26,6 @@ a:hover {
 
 .jumbotron {
     margin-top: 10%;
-}
-
-.landing {
-     background-image: linear-gradient(to bottom right, #575359, #809786)
 }
 
 .fav-main {
@@ -63,7 +59,7 @@ a:hover {
 .park-results {
     width: 100%;
     margin: 5px;
-    background-color: grey
+    background-color: grey;
 }
 
 .park-results-aside {
@@ -103,8 +99,78 @@ a:hover {
     text-align: center;
 }
 
-.home-and-beyond {
-     background-image: linear-gradient(to bottom right, #809786, #575359)
+.title-container {
+    display: inline-block;
 }
+
+.marker-label {
+    display: inline-block;
+}
+
+.card-title {
+    display: inline-block;
+}
+
+.search-fail {
+    color: red;
+    text-align: center;
+}
+
+.account-link {
+    color: black;
+}
+
+.account-link:hover {
+    color: black;
+}
+
+.heart {
+    background-color: red;
+    height: 30px;
+    transform: rotate(-45deg);
+    width: 30px;
+    margin-left: 48%;
+}
+
+.heart:before,
+.heart:after {
+  content: "";
+  background-color: red;
+  border-radius: 50%;
+  height: 30px;
+  position: absolute;
+  width: 30px;
+}
+
+.heart:before {
+  top: -15px;
+  left: 0;
+}
+
+.heart:after {
+  top: 0px;
+  left: 15;
+}
+
+.heart {
+   background-color: red;
+   text-decoration: none;
+}
+
+.auth {
+    background: url(../images/open-road.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.desert {
+    background-color: #e5e4cc;
+}
+
+
+
+
 
 

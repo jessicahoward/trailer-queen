@@ -205,11 +205,17 @@ public class HomeController {
             resultsList.add(aPark);
         }
 
-        model.addAttribute("baseLat", googLat);
-        model.addAttribute("baseLng", googLng);
-        model.addAttribute("locations", locationList);
-        model.addAttribute("parks", resultsList);
-        return "results";
+        if(resultsList.size() > 0) {
+            model.addAttribute("baseLat", googLat);
+            model.addAttribute("baseLng", googLng);
+            model.addAttribute("locations", locationList);
+            model.addAttribute("parks", resultsList);
+            return "results";
+        } else {
+            model.addAttribute("fail", "No results. Please expand your search area. ");
+            return "home";
+        }
+
 
     }
 }

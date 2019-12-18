@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 
-<body class="landing">
+<body class="auth">
 <nav th:replace="fragments :: navigation"></nav>
 
 <div class="container">
@@ -24,6 +24,8 @@
                     <div class="">
                         <button type="submit" class="btn btn-dark btn-block">Register User</button>
                     </div>
+                    <a class="navbar-brand account-link" href="/login">Login</a>
+
                 </div>
                 <span th:utext="${successMessage}"></span>
                 <div class="alert alert-success alert-dismissible col-sm-12"

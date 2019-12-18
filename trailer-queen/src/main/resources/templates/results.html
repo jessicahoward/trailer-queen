@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
-<body class="home-and-beyond" onload="initMap()" onunload="GUnload()">
+<body class="auth" onload="initMap()" onunload="GUnload()">
 
 <nav th:replace="fragments :: navigation"></nav>
 
@@ -10,7 +10,9 @@
 <aside class="park-results-aside col-md">
     <div class="card park-results" th:each="park : ${parks}">
         <div class="card-body">
-            <h5 class="marker-label"></h5><h5 class="card-title" th:text="${park.name}"></h5>
+            <div class="title-container">
+            <h6 class="marker-label"></h6><h6 class="card-title" th:text="' ' + ${park.name}"></h6>
+        </div>
             <p class="card-text" th:text="${park.description}"></p>
             <form action="/park-view">
                 <input type="hidden" name="code" th:value="${park.code}">

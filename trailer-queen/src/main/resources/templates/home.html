@@ -3,13 +3,15 @@
 
 <head th:replace="fragments :: head"></head>
 
-<body>
+<body class="auth">
 <nav th:replace="fragments :: navigation"></nav>
 
 <div class="container">
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <form method="POST" action="/results" class="form-signin">
+
+                <h5 class="search-fail" th:text="${fail}"></h5>
                 <h3 th:text="Search"></h3>
                 <input type="text" id="zip" name="zip" th:placeholder="Zipcode" class="form-control" required/>
                 <br />
@@ -37,12 +39,12 @@
                 </select>
                 <br />
                 <select class="form-control" name="dist">
-                    <option th:text="25" th:value="25"></option>
-                    <option th:text="50" th:value="50"></option>
-                    <option th:text="75" th:value="75"></option>
-                    <option th:text="100" th:value="100"></option>
-                    <option th:text="150" th:value="150"></option>
-                    <option th:text="200" th:value="200"></option>
+                    <option th:value="25">Within 25 miles</option>
+                    <option th:value="50">Within 50 miles</option>
+                    <option th:value="75">Within 75 miles</option>
+                    <option th:value="100">Within 100 miles</option>
+                    <option th:value="150">Within 150 miles</option>
+                    <option th:value="200">Within 200 miles</option>
                 </select>
                 <br />
                 <button class="btn btn-dark btn-block" name="Submit" value="Search" type="Submit" th:text="Search"></button>
@@ -52,7 +54,7 @@
 </div>
 
 <div class="fav-header">
-<h3 th:text="Favorites"></h3>
+<div class="heart"></div>
 <hr>
 </div>
 
