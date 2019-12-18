@@ -8,12 +8,10 @@ html {
 }
 
 .btn {
-        background-color: black;
         border: none;
 }
 
 .btn:hover {
-        background-color: black;
         border: none;
 }
 
@@ -89,7 +87,7 @@ a:hover {
 .weather-container {
     width: 90%;
     overflow-y: scroll;
-    margin-left: 20px;
+    margin-left: 60px;
 }
 
 .park-title {
@@ -105,5 +103,8 @@ a:hover {
     text-align: center;
 }
 
+.home-and-beyond {
+     background-image: linear-gradient(to bottom right, #809786, #575359)
+}
 
 

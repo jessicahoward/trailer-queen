@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
-<body>
+<body class="home-and-beyond">
 
 <nav th:replace="fragments :: navigation"></nav>
 
@@ -10,7 +10,7 @@
 <h1 class="park-title" th:text="${park.name}"></h1>
 <form class="save-park" method="POST">
     <input type="hidden" name="code" th:value="${park.code}">
-    <input type="submit"  th:value="Save">
+    <button class="btn btn-danger" name="Submit" type="Submit" th:text="Save"></button>
 </form>
 </div>
 <div class="row weather-container">

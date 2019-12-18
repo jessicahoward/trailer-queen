@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
-<body onload="initMap()" onunload="GUnload()">
+<body class="home-and-beyond" onload="initMap()" onunload="GUnload()">
 
 <nav th:replace="fragments :: navigation"></nav>
 
@@ -10,11 +10,11 @@
 <aside class="park-results-aside col-md">
     <div class="card park-results" th:each="park : ${parks}">
         <div class="card-body">
-            <h5 class="card-title" th:text="${park.name}"></h5>
+            <h5 class="marker-label"></h5><h5 class="card-title" th:text="${park.name}"></h5>
             <p class="card-text" th:text="${park.description}"></p>
             <form action="/park-view">
                 <input type="hidden" name="code" th:value="${park.code}">
-                <button type="submit" class="btn btn-primary btn-block">View</button>
+                <button type="submit" class="btn btn-dark btn-block">View</button>
             </form>
         </div>
     </div>
@@ -29,6 +29,8 @@
       var baseLat = [[${baseLat}]];
       var baseLng = [[${baseLng}]];
       var parkLocations = [[${locations}]];
+      var labels = "ABCDEFGHIJ";
+      var labelIndex = 0;
 
       var map;
       var marker;
@@ -48,10 +50,18 @@
         marker = new google.maps.Marker({
             position: parkLatLng,
             map: map,
-            title: tag
+            label: labels[labelIndex++ % labels.length]
         });
        }
       }
+
+      var x = document.getElementsByClassName("marker-label");
+      console.log(x);
+
+      for(i = 0; i < x.length; i++) {
+        x[i].innerHTML = labels[labelIndex++ % labels.length] + ". ";
+      }
+
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6urX1HiPnH_DH0Miwbaz3Ce2htxSS-68&callback=initMap"
         async defer>
