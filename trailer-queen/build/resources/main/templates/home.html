@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: head"></head>
+
+<body class="auth">
+<nav th:replace="fragments :: navigation"></nav>
+
+<div class="container">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <form method="POST" action="/results" class="form-signin">
+
+                <h5 class="search-fail" th:text="${fail}"></h5>
+                <h3 th:text="Search"></h3>
+                <input type="text" id="zip" name="zip" th:placeholder="Zipcode" class="form-control" required/>
+                <br />
+                <select class="form-control" name="vehicle">
+                    <option th:text="Motorcycles" th:value="Motorcycles"></option>
+                    <option th:text="Jeep" th:value="Jeep"></option>
+                    <option th:text="SxS" th:value="SxS"></option>
+                    <option th:text="ATV" th:value="ATV"></option>
+                </select>
+                <br />
+                <select class="form-control" name="experience">
+                    <option th:text="Beginner" th:value="beginner"></option>
+                    <option th:text="Intermediate" th:value="intermediate"></option>
+                    <option th:text="Advanced" th:value="advanced"></option>
+                    <option th:text="Expert" th:value="expert"></option>
+                </select>
+                <br />
+                <select class="form-control" name="terrain">
+                    <option th:text="Mud" th:value="Mud"></option>
+                    <option th:text="Sand" th:value="Sand"></option>
+                    <option th:text="Jumps" th:value="Sand"></option>
+                    <option th:value="HillClimbs">Hill Climbs</option>
+                    <option th:value="HardPack">Hard Pack</option>
+                    <option th:value="LargeLooseRocks">Loose Rocks</option>
+                </select>
+                <br />
+                <select class="form-control" name="dist">
+                    <option th:value="25">Within 25 miles</option>
+                    <option th:value="50">Within 50 miles</option>
+                    <option th:value="75">Within 75 miles</option>
+                    <option th:value="100">Within 100 miles</option>
+                    <option th:value="150">Within 150 miles</option>
+                    <option th:value="200">Within 200 miles</option>
+                </select>
+                <br />
+                <button class="btn btn-dark btn-block" name="Submit" value="Search" type="Submit" th:text="Search"></button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="fav-header">
+<div class="heart"></div>
+<hr>
+</div>
+
+<div class="container row fav-main">
+    <h4 th:unless="${favParks} and ${favParks.size()}"></h4>
+    <div class="card fav-card" th:each="park: ${favParks}">
+        <div class="card-body">
+            <a th:href="'park-view?code=' + ${park.code}"><p th:text="${park.name}"></p></a>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

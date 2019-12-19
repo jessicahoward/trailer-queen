@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="auth" onload="initMap()" onunload="GUnload()">
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<div class="container row">
+<aside class="park-results-aside col-md">
+    <div class="card park-results" th:each="park : ${parks}">
+        <div class="card-body">
+            <div class="title-container">
+            <h6 class="marker-label"></h6><h6 class="card-title" th:text="' ' + ${park.name}"></h6>
+        </div>
+            <p class="card-text" th:text="${park.description}"></p>
+            <form action="/park-view">
+                <input type="hidden" name="code" th:value="${park.code}">
+                <button type="submit" class="btn btn-dark btn-block">View</button>
+            </form>
+        </div>
+    </div>
+</aside>
+    <div class="container map-container col-md">
+        <div id="map"></div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+
+      var baseLat = [[${baseLat}]];
+      var baseLng = [[${baseLng}]];
+      var parkLocations = [[${locations}]];
+      var labels = "ABCDEFGHIJ";
+      var labelIndex = 0;
+
+      var map;
+      var marker;
+      var parkLatLng;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: parseFloat(baseLat), lng: parseFloat(baseLng)},
+          zoom: 6
+        });
+
+       for (i = 0; i < parkLocations.length; i++) {
+        var tag = toString(i + 1);
+        var latt = parseFloat(parkLocations[i].latitude);
+        var long = parseFloat(parkLocations[i].longitude);
+        parkLatLng = {lat: latt, lng: long};
+
+        marker = new google.maps.Marker({
+            position: parkLatLng,
+            map: map,
+            label: labels[labelIndex++ % labels.length]
+        });
+       }
+      }
+
+      var x = document.getElementsByClassName("marker-label");
+      console.log(x);
+
+      for(i = 0; i < x.length; i++) {
+        x[i].innerHTML = labels[labelIndex++ % labels.length] + ". ";
+      }
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6urX1HiPnH_DH0Miwbaz3Ce2htxSS-68&callback=initMap"
+        async defer>
+</script>
+
+</body>
+</html>
