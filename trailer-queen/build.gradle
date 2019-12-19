@@ -15,6 +15,9 @@ configurations {
 	}
 }
 
+task wrapper(type: Wrapper) {
+	gradleVersion = '5.6.4'
+}
 
 repositories {
 	mavenCentral()
