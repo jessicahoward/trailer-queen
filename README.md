@@ -1,7 +1,5 @@
 # trailer-queen
 
-[Video Demonstration](https://drive.google.com/file/d/1SXnj5oTFpEBHZXPp3KounwVEN-i-S6q2/view)
-
 [Video Demonstration](https://drive.google.com/file/d/14JoGhjxHgNnTvYFptlMZwvcM18OEp1MV/view?usp=sharing)
 
 ### Overview
